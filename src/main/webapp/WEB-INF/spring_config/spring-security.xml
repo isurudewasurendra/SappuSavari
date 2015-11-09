@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security-3.0.3.xsd
+		http://www.springframework.org/schema/jdbc
+		http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+		
+    <!-- HTTP security configurations -->
+    <security:http auto-config="false" use-expressions="true" entry-point-ref="myAuthenticationEntryPoint">
+
+        <!-- Configure these elements to secure URIs in your application -->
+        <security:intercept-url pattern="/resources/**" access="permitAll" />
+        <security:intercept-url pattern="/images/**" access="permitAll" />
+        <security:intercept-url pattern="/js/**" access="permitAll" />
+        <security:intercept-url pattern="/style/**" access="permitAll" />
+        <security:intercept-url pattern="/index.jsp" access="permitAll" />
+        
+        <security:intercept-url pattern="/home/**" access="permitAll" />
+        <security:intercept-url pattern="/login/**" access="permitAll" />
+        <security:intercept-url pattern="/user/updateUserLocation.htm" access="permitAll" />
+        <security:intercept-url pattern="/session/*" access="permitAll" />
+        
+        <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER')"/>
+        
+        <security:custom-filter position="FORM_LOGIN_FILTER" ref="myAuthFilter" />
+        
+        <security:logout logout-success-url="/login/login.htm" />
+        
+        <security:access-denied-handler error-page="/accessDenied.jsp"/>
+        
+    </security:http>
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider ref="authenticationProvider" />
+	</security:authentication-manager>
+
+	<beans:bean id="authenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<beans:property name="userDetailsService" ref="userDetailsService" />
+	</beans:bean>
+	
+	<beans:bean id="loginSuccessHandler"
+		class="com.isd.sappu.savari.services.LoginSuccessHandler">
+	</beans:bean>
+	
+	<beans:bean id="userDetailsService"
+		class="com.isd.sappu.savari.services.UserDetailsServiceImpl">
+	</beans:bean>
+	
+	<beans:bean id="loginFailureHandler"
+		class="com.isd.sappu.savari.services.LoginFailureHandler">
+	</beans:bean>
+	
+	<beans:bean id="myAuthenticationEntryPoint" class="org.springframework.security.web.authentication.AuthenticationProcessingFilterEntryPoint">
+	  	<beans:property name="loginFormUrl" value="/login/login.htm"></beans:property>
+	  </beans:bean>
+    
+    <beans:bean id="myAuthFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+     	<beans:property name="authenticationSuccessHandler" ref="loginSuccessHandler"></beans:property>
+     	<beans:property name="authenticationFailureHandler" ref="loginFailureHandler"></beans:property>
+     	<beans:property name="sessionAuthenticationStrategy" ref="sas" />
+    	<beans:property name="authenticationManager" ref="authenticationManager" />
+  	</beans:bean>
+	  
+   	<beans:bean id="sas" class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+	    <beans:constructor-arg name="sessionRegistry" ref="sessionRegistry" />
+	    <beans:property name="maximumSessions" value="1" />
+ 	</beans:bean>
+	  
+  	<beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />
+    
+</beans:beans>

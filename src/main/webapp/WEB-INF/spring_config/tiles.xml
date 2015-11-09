@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+    <definition name="home.layout" template="/WEB-INF/views/layouts/homelayout.jsp">
+        <put-attribute name="title-position" value="Template" />
+        <put-attribute name="topnavbar-position" value="/WEB-INF/views/commons/topnavbar.jsp" />
+        <put-attribute name="header-position" value="/WEB-INF/views/commons/header.jsp" />
+        <put-attribute name="midnavbar-position" value="/WEB-INF/views/commons/midnavbar.jsp" />
+        <put-attribute name="body-position" value="" />      
+        <put-attribute name="footer-position" value="/WEB-INF/views/commons/footer.jsp" />
+    </definition>
+    
+    <definition name="login.layout" template="/WEB-INF/views/layouts/loginlayout.jsp">
+        <put-attribute name="title-position" value="Template" />
+        <put-attribute name="header-position" value="/WEB-INF/views/commons/login_header.jsp" />
+        <put-attribute name="body-position" value="" />      
+        <put-attribute name="footer-position" value="/WEB-INF/views/commons/footer.jsp" />
+    </definition>
+    
+    <!-- login page -->
+    <definition name="login" extends="login.layout">
+        <put-attribute name="title" value="Login" /> 
+        <put-attribute name="body-position" value="/WEB-INF/views/content/auth/login.jsp" />   
+    </definition>
+    
+     <!-- sign up page -->
+    <definition name="signup" extends="login.layout">
+        <put-attribute name="title" value="Login" /> 
+        <put-attribute name="body-position" value="/WEB-INF/views/content/auth/signup.jsp" />   
+    </definition>
+    
+    <!-- home page -->
+    <definition name="home" extends="home.layout">
+        <put-attribute name="title" value="Home" /> 
+        <put-attribute name="body-position" value="/WEB-INF/views/content/body.jsp" />   
+    </definition>
+    
+    <!-- profile page -->
+    <definition name="profile" extends="home.layout">
+        <put-attribute name="title" value="User Profile" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/user/profile.jsp" />   
+    </definition>
+    
+    <!-- view user search history page -->
+    <definition name="usersearchhistory" extends="home.layout">
+        <put-attribute name="title" value="User History" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/user/userSearchHistory.jsp" />   
+    </definition>
+    
+    <!-- view user follow page -->
+    <definition name="userfollow" extends="home.layout">
+        <put-attribute name="title" value="Follow Buyer" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/user/followUser.jsp" />   
+    </definition>
+    
+    <!-- view product page -->
+    <definition name="listproduct" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/listproduct.jsp" />   
+    </definition>
+    
+    <!-- list product category page -->
+    <definition name="listproductcategory" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/listProductCategory.jsp" />   
+    </definition>
+    
+    <!-- list product sub category page -->
+    <definition name="listproductsubcategory" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/listProductSubCategory.jsp" />   
+    </definition>
+    
+    <!-- list District page -->
+    <definition name="listdistrict" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/listDistrict.jsp" />   
+    </definition>
+    
+    <!-- list popular area page -->
+    <definition name="listpopulararea" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/listPopularArea.jsp" />   
+    </definition>
+    
+    <!-- add Product page -->
+    <definition name="addproduct" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/addProduct.jsp" />   
+    </definition>
+    
+    <!-- show Product page -->
+    <definition name="showProduct" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/showProduct.jsp" />   
+    </definition>
+    
+    <!-- search Product page -->
+    <definition name="searchproduct" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/searchProduct.jsp" />   
+    </definition>
+    
+    <!-- list product category page for buy-->
+    <definition name="listproductcategorybuy" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/listProductCategoryBuy.jsp" />   
+    </definition>
+    
+    <!-- list product sub category page for buy-->
+    <definition name="listproductsubcategorybuy" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/listProductSubCategoryBuy.jsp" />   
+    </definition>
+    
+    <!-- list District page for buy-->
+    <definition name="listdistrictbuy" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/listDistrictBuy.jsp" />   
+    </definition>
+    
+    <!-- list popular area page for buy-->
+    <definition name="listpopularareabuy" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/listPopularAreaBuy.jsp" />   
+    </definition>
+    
+    <!-- list searched results for buy-->
+    <definition name="listsearchresult" extends="home.layout">
+        <put-attribute name="title" value="View Products" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/product/listSearchResult.jsp" />   
+    </definition>
+    
+    <!-- message dashoboard page-->
+    <definition name="messagedashboard" extends="home.layout">
+        <put-attribute name="title" value="Messages" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/message/messageDashboard.jsp" />   
+    </definition>
+    
+    <!-- create message page-->
+    <definition name="createmessage" extends="home.layout">
+        <put-attribute name="title" value="Messages" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/message/createMessage.jsp" />   
+    </definition>
+     
+</tiles-definitions>
