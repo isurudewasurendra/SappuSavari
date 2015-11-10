@@ -3,11 +3,13 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
+
 <div class="wrapper">
-   <form class="form-signin" name="f" action="../j_spring_security_check" method="POST" >      
+   <form class="form-signin" name="f" action='<c:url value="../login/login_check" />' method="POST" >      
      <h2 class="form-signin-heading">Please login</h2>
-     <input id="j_username" type='text' name='j_username' class="form-control" placeholder="Email Address" />
-     <input id="j_password" type='password' name='j_password' class="form-control" placeholder="Password"/>      
+     <input id="username" type='text' name='username' class="form-control" placeholder="Email Address" />
+     <input id="password" type='password' name='password' class="form-control" placeholder="Password"/>      
      <label class="checkbox">
        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
      </label>
