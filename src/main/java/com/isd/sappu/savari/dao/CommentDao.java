@@ -13,5 +13,7 @@ public interface CommentDao {
 	public String deleteComment(Comment comment);
 	
 	public List<Comment> getCommentsByProductId(long productId);
+
+	public List<Comment> getCommentListByUserId(long userId);
 	
 }

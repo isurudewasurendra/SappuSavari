@@ -22,5 +22,5 @@ public interface ProductDao {
 	public List<Product> getPropertyProductList(SearchRequest searchRequest);
 	
 	public List<Product> getOtherProductList(SearchRequest searchRequest);
- 	
+
 }

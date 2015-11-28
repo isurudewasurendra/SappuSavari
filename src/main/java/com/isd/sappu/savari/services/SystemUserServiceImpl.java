@@ -1,5 +1,7 @@
 package com.isd.sappu.savari.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,11 @@ public class SystemUserServiceImpl implements SystemUserService{
 	@Override
 	public SystemUser getSystemUserByUsername(String username) {
 		return systemUserDao.getSystemUserByUsername(username);
+	}
+
+	@Override
+	public List<SystemUser> getAllSystemUsers() {
+		return systemUserDao.getAllSystemUsers();
 	}
 
 }

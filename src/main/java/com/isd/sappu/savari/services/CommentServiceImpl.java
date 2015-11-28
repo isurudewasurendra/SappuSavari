@@ -34,4 +34,9 @@ public class CommentServiceImpl implements CommentService{
 		return commentDao.getCommentsByProductId(productId);
 	}
 
+	@Override
+	public List<Comment> getCommentListByUserId(long userId) {
+		return commentDao.getCommentListByUserId(userId);
+	}
+
 }

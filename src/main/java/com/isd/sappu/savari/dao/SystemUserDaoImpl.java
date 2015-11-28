@@ -1,5 +1,7 @@
 package com.isd.sappu.savari.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,19 @@ public class SystemUserDaoImpl implements SystemUserDao{
 			Session session = sessionFactory.getCurrentSession();
             return (SystemUser) session.createQuery("from SystemUser where username = :username")
             		.setParameter("username", username).uniqueResult();
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<SystemUser> getAllSystemUsers() {
+		try{
+			Session session = sessionFactory.getCurrentSession();
+            return session.createCriteria(SystemUser.class).list();
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;

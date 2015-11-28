@@ -69,4 +69,18 @@ public class CommentDaoImpl implements CommentDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Comment> getCommentListByUserId(long userId) {
+		try{
+			Session session = sessionFactory.getCurrentSession();
+            return (List<Comment>) session.createQuery("from Comment where user.userId=:userId")
+            		.setParameter("userId", userId).list();
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

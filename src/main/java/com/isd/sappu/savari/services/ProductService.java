@@ -17,4 +17,8 @@ public interface ProductService {
 	
 	public List<Product> getSearchedProductList(SearchRequest searchRequest);
 
+	public List<Product> getFavoriteProductsByUser(long userId);
+
+	public List<Product> getCommentedProductsByUser(long userId);
+
 }

@@ -15,6 +15,7 @@
     
     <definition name="login.layout" template="/WEB-INF/views/layouts/loginlayout.jsp">
         <put-attribute name="title-position" value="Template" />
+        <put-attribute name="topnavbar-position" value="/WEB-INF/views/commons/topnavbar.jsp" />
         <put-attribute name="header-position" value="/WEB-INF/views/commons/login_header.jsp" />
         <put-attribute name="body-position" value="" />      
         <put-attribute name="footer-position" value="/WEB-INF/views/commons/footer.jsp" />

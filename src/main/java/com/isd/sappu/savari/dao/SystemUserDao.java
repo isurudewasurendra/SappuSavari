@@ -1,5 +1,7 @@
 package com.isd.sappu.savari.dao;
 
+import java.util.List;
+
 import com.isd.sappu.savari.domains.SystemUser;
 
 public interface SystemUserDao {
@@ -11,5 +13,7 @@ public interface SystemUserDao {
 	public SystemUser getSystemUser(long userId);
 	
 	public String deleteSystemUser(SystemUser user);
+	
+	public List<SystemUser> getAllSystemUsers();
 	
 }

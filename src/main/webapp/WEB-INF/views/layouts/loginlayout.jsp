@@ -19,6 +19,7 @@
 </head>
 <body>
 	<div class="container">
+		<div id="topnavbar"><tiles:insertAttribute name="topnavbar-position"/></div>
 		<div id="header"><tiles:insertAttribute name="header-position"/></div>
 		<div id="body"><tiles:insertAttribute name="body-position"/></div>
 		<div id="footer"> <tiles:insertAttribute name="footer-position"/></div>  

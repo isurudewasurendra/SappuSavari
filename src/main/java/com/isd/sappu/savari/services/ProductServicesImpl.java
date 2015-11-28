@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.isd.sappu.savari.dao.ProductDao;
+import com.isd.sappu.savari.domains.Comment;
+import com.isd.sappu.savari.domains.Favorite;
 import com.isd.sappu.savari.domains.Product;
 import com.isd.sappu.savari.domains.ProductCategory;
 import com.isd.sappu.savari.domains.ProductSubCategory;
@@ -18,6 +20,12 @@ public class ProductServicesImpl implements ProductService{
 
 	@Autowired
 	ProductDao productDao;
+	
+	@Autowired
+	FavoriteService favoriteService;
+	
+	@Autowired
+	CommentService commentService;
 	
 	@Override
 	public List<Product> getAllProducts() {
@@ -58,6 +66,39 @@ public class ProductServicesImpl implements ProductService{
 	@Override
 	public Product getProductById(long productId) {
 		return productDao.getProduct(productId);
+	}
+
+	@Override
+	public List<Product> getFavoriteProductsByUser(long userId) {
+		try {
+			List<Favorite> favoriteList = favoriteService.getFavoritesByUserId(userId);
+			List<Product> productList = new ArrayList<Product>();
+			for (Favorite favorite : favoriteList) {
+				productList.add(productDao.getProduct(favorite.getProduct().getProductId()));
+			}
+			return productList;
+		} catch (Exception e) {
+			System.out.println("error occured when get products for the user's favorite selection");
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
+	@Override
+	public List<Product> getCommentedProductsByUser(long userId) {
+		try {
+			List<Comment> commentList = commentService.getCommentListByUserId(userId);
+			List<Product> productList = new ArrayList<Product>();
+			for (Comment comment : commentList) {
+				productList.add(productDao.getProduct(comment.getProduct().getProductId()));
+			}
+			return productList;
+		} catch (Exception e) {
+			System.out.println("error occured when get products for the user's comments");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
