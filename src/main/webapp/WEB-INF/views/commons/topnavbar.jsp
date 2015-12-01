@@ -22,7 +22,7 @@
       });
 </script>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top">
 	<div class="continer-fluid">
 		<div>
 			<ul class="nav navbar-nav pull-left">

@@ -7,9 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.isd.sappu.savari.domains.Notification;
 import com.isd.sappu.savari.domains.Product;
 import com.isd.sappu.savari.domains.SearchRequest;
 import com.isd.sappu.savari.domains.SystemUser;
+import com.isd.sappu.savari.util.EnumConstant;
 
 public class ScheduleLocationSearchService {
 
@@ -21,8 +23,11 @@ public class ScheduleLocationSearchService {
 
 	@Autowired
 	SearchRequestService searchRequestService;
+	
+	@Autowired
+	NotificationService notificationService;
 
-	@Scheduled(fixedDelay = 1000 * 10)
+	@Scheduled(fixedDelay = 1000 * 60)
 	public void demoServiceMethod() {
 		System.out.println("****************Schedular started running at " + new Date() + "**********************");
 
@@ -32,6 +37,7 @@ public class ScheduleLocationSearchService {
 		for (SystemUser applicationUser : applicationUserList) {
 
 			List<Product> relevantProducts = new ArrayList<Product>();
+			List<Product> searchedProductList = new ArrayList<Product>();
 
 			// get favorite products
 			List<Product> favoriteProducts = productService.getFavoriteProductsByUser(applicationUser.getUserId());
@@ -47,14 +53,29 @@ public class ScheduleLocationSearchService {
 			for (SearchRequest searchRequest : searchRequests) {
 				List<Product> searchedProducts = productService.getSearchedProductList(searchRequest);
 				relevantProducts.addAll(searchedProducts);
+				searchedProductList.addAll(searchedProducts);
 			}
 
 			for (Product product : relevantProducts) {
 				System.out.println("--------relevant product id--------" + product.getProductId());
 			}
+			
+			System.out.println("********************************provide favorite notification**********************************");
+			for (Product product : favoriteProducts) {
+				//get no of comment after favorite added date and time
+				//check existing notification
+				//if not exist add notification as not seen
+			}
+			
+			System.out.println("********************************provide comment notification**********************************");
+			for (Product product : commentedProducts) {
+				//get no of comment after last comment added date and time
+				//check existing notification
+				//if not exist add notification as not seen
+			}
 
+			System.out.println("********************************provide short distance notification**********************************");
 			for (Product product : relevantProducts) {
-				System.out.println("--------get relevant product id--------" + product.getProductId());
 				// calculate the distance
 				double fromLat = applicationUser.getLatitude();
 				double fromLon = applicationUser.getLongtitude();
@@ -62,9 +83,17 @@ public class ScheduleLocationSearchService {
 				double toLon = product.getUser().getLongtitude();
 				double distance = this.getDistanceFromLatLonInKm(fromLat, fromLon, toLat, toLon);
 				if (distance < 1) {
-					//this product details should post the users notification panel
-					
+					//this product details should post the users notification panel high priority
 				}
+			}
+			
+			System.out.println("********************************provide search notification**********************************");
+			for (Product product : searchedProductList) {
+				//this product details should post the users notification panel low priority
+				
+				
+				Notification notification = new Notification(0, EnumConstant.NotificationType.SEARCH.toString(), "we found out a new product", 4, null, new Date(), applicationUser, product);
+				notificationService.saveUpdateNotification(notification);
 			}
 
 		}

@@ -889,4 +889,42 @@ public class EnumConstant {
 		}
 
 	}
+	
+	public enum NotificationType {
+		
+		DISTANCE("distance"), FAVORITE("favorite"), COMMENT("comment"), SEARCH("search");
+
+		private String displayName;
+
+		private NotificationType(String name) {
+			this.displayName = name;
+		}
+
+		public String getDisplayName() {
+			return displayName;
+		}
+
+		private static final Map<String, NotificationType> LOOKUP = new LinkedHashMap<String, NotificationType>();
+		private static final Map<String, NotificationType> CODE_LOOKUP = new LinkedHashMap<String, NotificationType>();
+
+		static {
+			for (NotificationType notificationType : EnumSet.allOf(NotificationType.class)) {
+				LOOKUP.put(notificationType.getDisplayName(), notificationType);
+				CODE_LOOKUP.put(notificationType.toString(), notificationType);
+			}
+		}
+		
+		public static NotificationType fromCode(String code) {
+			return CODE_LOOKUP.get(code);
+		}
+
+		public static NotificationType fromDisplayName(String displayName) {
+			return LOOKUP.get(displayName);
+		}
+		
+		public static Map<String, NotificationType> getMap(){
+			return LOOKUP;
+		}
+
+	}
 }

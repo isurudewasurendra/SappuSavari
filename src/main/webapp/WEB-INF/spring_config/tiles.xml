@@ -146,5 +146,11 @@
         <put-attribute name="title" value="Messages" />
         <put-attribute name="body-position" value="/WEB-INF/views/content/message/createMessage.jsp" />   
     </definition>
+    
+    <!-- notification dashoboard page-->
+    <definition name="notificationdashboard" extends="home.layout">
+        <put-attribute name="title" value="Notifications" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/message/notificationDashboard.jsp" />   
+    </definition>
      
 </tiles-definitions>

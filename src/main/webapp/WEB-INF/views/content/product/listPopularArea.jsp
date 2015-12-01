@@ -10,7 +10,7 @@
     <h1>Select Popular Area</h1>
     	<div class="container-fluid">
 			<c:forEach var="popularArea" items="${popularAreaList}">
-				<a href="addproduct.htm?pscid=${productSubCategoryId}&paid=${popularArea.areaId}"><button>${popularArea.areaName}</button></a>
+				<a href="addproduct.htm?pscid=${productSubCategoryId}&paid=${popularArea.areaId}" class="btn btn-default">${popularArea.areaName}</a>
 			</c:forEach>
     	</div>
     </div>

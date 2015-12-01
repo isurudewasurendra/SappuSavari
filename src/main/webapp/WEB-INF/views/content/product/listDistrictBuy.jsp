@@ -10,7 +10,7 @@
     <h1>Select District</h1>
     	<div class="container-fluid">
 			<c:forEach var="district" items="${districtList}">
-				<a href="listPopularArea.htm?pscid=${productSubCategoryId}&did=${district.districtId}"><button>${district.districtName}</button></a>
+				<a href="listPopularArea.htm?pscid=${productSubCategoryId}&did=${district.districtId}" class="btn btn-default">${district.districtName}</a>
 			</c:forEach>
     	</div>
     </div>

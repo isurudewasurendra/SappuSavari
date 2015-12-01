@@ -10,7 +10,7 @@
     <h1>Select Product Category</h1>
     	<div class="container-fluid">
 			<c:forEach var="productCategory" items="${productCategoryList}">
-				<a href="listProductSubCategory.htm?pcid=${productCategory.productCategoryId}"><button>${productCategory.categoryName}</button></a>
+				<a href="listProductSubCategory.htm?pcid=${productCategory.productCategoryId}" class="btn btn-default">${productCategory.categoryName}</a>
 			</c:forEach>
     	</div>
     </div>

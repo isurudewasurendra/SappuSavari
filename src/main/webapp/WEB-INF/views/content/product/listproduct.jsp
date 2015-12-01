@@ -28,7 +28,7 @@
     		
     	</div>
     	<br/><hr/>
-    	<a href="listProductCategory.htm"><button>Add More Product</button></a>
+    	<a href="listProductCategory.htm" class="btn btn-primary btn-lg">Add More Product</a>
     </div>
 </div>
 

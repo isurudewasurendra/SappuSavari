@@ -7,11 +7,27 @@
   <div class="swipe-area"></div>
   <a href="#" data-toggle=".container" id="sidebar-toggle"> <span class="bar"></span> <span class="bar"></span> <span class="bar"></span> </a>
   <div class="content">
-    <h1>Select Product Sub Category</h1>
+    <h1>Messages</h1>
     	<div class="container-fluid">
-			<c:forEach var="productSubCategory" items="${productSubCategoryList}">
-				<a href="listDistrict.htm?pscid=${productSubCategory.productSubCategoryId}" class="btn btn-default">${productSubCategory.subCategoryName}</a>
-			</c:forEach>
+    	
+    		<h2>Inbox</h2><hr/>
+    		<div>
+    			<c:forEach var="message" items="${inboxMessages}">
+    				<span>${message.messageId}</span>
+    				<span>${message.message}</span>
+    			</c:forEach>
+    		</div>
+    		
+    		<hr/><hr/><hr/>
+    		
+    		<h2>Sent</h2><hr/>
+    		<div>
+    			<c:forEach var="message" items="${sentMessages}">
+    				<span>${message.messageId}</span>
+    				<span>${message.message}</span>
+    			</c:forEach>
+    		</div>
+    		
     	</div>
     </div>
 </div>
