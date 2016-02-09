@@ -6,7 +6,7 @@ import com.isd.sappu.savari.domains.Notification;
 
 public interface NotificationService {
 
-	public long saveUpdateNotification(Notification notification);
+	public Notification saveUpdateNotification(Notification notification);
 	
 	public Notification getNotification(long notificationId);
 	
@@ -16,6 +16,6 @@ public interface NotificationService {
 	
 	public List<Notification> getNotificationsByProductId(long productId);
 	
-	public String deleteNotification(Notification notification);
+	public void deleteNotification(Notification notification);
 	
 }

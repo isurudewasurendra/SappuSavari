@@ -2,20 +2,20 @@ package com.isd.sappu.savari.dao;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.isd.sappu.savari.domains.Favorite;
+import com.isd.sappu.savari.domains.Product;
+import com.isd.sappu.savari.domains.SystemUser;
 
-public interface FavoriteDao {
+public interface FavoriteDao extends CrudRepository<Favorite, Long>{
 
-	public long saveUpdateFavorite(Favorite favorite);
+	public Favorite findByFavoriteId(long favoriteId);
 	
-	public Favorite getFavorite(long favoriteId);
+	public Favorite findByUserAndProduct(SystemUser user, Product product);
 	
-	public Favorite getFavorite(long userId, long productId);
+	public List<Favorite> findByUser(SystemUser user);
 	
-	public List<Favorite> getFavoritesByUserId(long userId);
-	
-	public List<Favorite> getFavoritesByProductId(long productId);
-	
-	public String deleteFavorite(Favorite favorite);
+	public List<Favorite> findByProduct(Product product);
 	
 }

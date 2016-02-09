@@ -2,16 +2,15 @@ package com.isd.sappu.savari.dao;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.isd.sappu.savari.domains.SearchRequest;
+import com.isd.sappu.savari.domains.SystemUser;
 
-public interface SearchRequestDao {
+public interface SearchRequestDao extends CrudRepository<SearchRequest, Long>{
 
-	public SearchRequest getSearchRequestById(long searchRequestId);
+	public SearchRequest findBySearchRequestId(long searchRequestId);
 	
-	public long saveUpdateSearchRequest(SearchRequest searchRequest);
-	
-	public String deleteSearchRequest(long searchRequestId);
-	
-	public List<SearchRequest> getAllSearchRequestByUserId(long userId);
+	public List<SearchRequest> findByUser(SystemUser user);
 	
 }

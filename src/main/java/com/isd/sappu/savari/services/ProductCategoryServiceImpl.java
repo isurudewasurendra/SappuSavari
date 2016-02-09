@@ -15,13 +15,13 @@ public class ProductCategoryServiceImpl implements ProductCategoryService{
 	ProductCategoryDao productCategoryDao;
 
 	@Override
-	public long saveOrUpdateProductCategory(ProductCategory productCategory) {
-		return productCategoryDao.saveOrUpdateProductCategory(productCategory);
+	public ProductCategory saveOrUpdateProductCategory(ProductCategory productCategory) {
+		return productCategoryDao.save(productCategory);
 	}
 
 	@Override
 	public List<ProductCategory> getAllProductCategory() {
-		return productCategoryDao.getAllProductCategory();
+		return productCategoryDao.findAll();
 	}
 	
 	

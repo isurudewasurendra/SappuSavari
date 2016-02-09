@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.isd.sappu.savari.dao.CommentDao;
 import com.isd.sappu.savari.domains.Comment;
+import com.isd.sappu.savari.domains.Product;
+import com.isd.sappu.savari.domains.SystemUser;
 
 @Service
 public class CommentServiceImpl implements CommentService{
@@ -15,28 +17,32 @@ public class CommentServiceImpl implements CommentService{
 	private CommentDao commentDao;
 	
 	@Override
-	public long saveUpdateComment(Comment comment) {
-		return commentDao.saveUpdateComment(comment);
+	public Comment saveUpdateComment(Comment comment) {
+		return commentDao.save(comment);
 	}
 
 	@Override
 	public Comment getComment(long commentId) {
-		return commentDao.getComment(commentId);
+		return commentDao.findByCommentId(commentId);
 	}
 
 	@Override
-	public String deleteComment(Comment comment) {
-		return commentDao.deleteComment(comment);
+	public void deleteComment(Comment comment) {
+		commentDao.delete(comment);
 	}
 
 	@Override
 	public List<Comment> getCommentListByProductId(long productId) {
-		return commentDao.getCommentsByProductId(productId);
+		Product product = new Product();
+		product.setProductId(productId);
+		return commentDao.findCommentByProduct(product);
 	}
 
 	@Override
 	public List<Comment> getCommentListByUserId(long userId) {
-		return commentDao.getCommentListByUserId(userId);
+		SystemUser systemUser = new SystemUser();
+		systemUser.setUserId(userId);
+		return commentDao.findCommentByUser(systemUser);
 	}
 
 }

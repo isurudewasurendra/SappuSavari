@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Null;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,6 @@ import com.isd.sappu.savari.services.ProductService;
 import com.isd.sappu.savari.services.ProductSubCategoryService;
 import com.isd.sappu.savari.util.AppConstant;
 import com.isd.sappu.savari.util.EnumConstant;
-import com.isd.sappu.savari.util.FileUploadManager;
 import com.isd.sappu.savari.util.EnumConstant.AuthenticityType;
 import com.isd.sappu.savari.util.EnumConstant.BodyType;
 import com.isd.sappu.savari.util.EnumConstant.CameraBrand;
@@ -43,6 +41,7 @@ import com.isd.sappu.savari.util.EnumConstant.ProductType;
 import com.isd.sappu.savari.util.EnumConstant.TVBrand;
 import com.isd.sappu.savari.util.EnumConstant.TransmissionType;
 import com.isd.sappu.savari.util.EnumConstant.VanBusBrand;
+import com.isd.sappu.savari.util.FileUploadManager;
 import com.isd.sappu.savari.util.SessionUtil;
 
 @Controller(value="sellController")
@@ -176,7 +175,7 @@ public class SellController {
 	}
 	
 	@RequestMapping(value="addproduct", method=RequestMethod.POST)
-	public String postAddProduct(@RequestParam("inputProductPic") @Null CommonsMultipartFile[] productImages, HttpServletRequest request){
+	public String postAddProduct(@RequestParam("inputProductPic") CommonsMultipartFile[] productImages, HttpServletRequest request){
 	
 		long productSubCategoryId = Long.parseLong(request.getParameter("productSubCategoryId"));
 		long popularAreaId = Long.parseLong(request.getParameter("popularAreaId"));

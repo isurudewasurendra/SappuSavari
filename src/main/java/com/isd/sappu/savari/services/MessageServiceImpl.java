@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.isd.sappu.savari.dao.MessageDao;
 import com.isd.sappu.savari.domains.Message;
+import com.isd.sappu.savari.domains.SystemUser;
 
 @Repository
 @Transactional
@@ -17,28 +18,32 @@ public class MessageServiceImpl implements MessageService {
 	private MessageDao messageDao;
 	
 	@Override
-	public long saveUpdateMessage(Message message) {
-		return messageDao.saveUpdateMessage(message);
+	public Message saveUpdateMessage(Message message) {
+		return messageDao.save(message);
 	}
 
 	@Override
 	public Message getMessage(long messageId) {
-		return messageDao.getMessage(messageId);
+		return messageDao.findOne(messageId);
 	}
 
 	@Override
 	public List<Message> getMessagesBySender(long userId) {
-		return messageDao.getMessagesBySender(userId);
+		SystemUser sender = new SystemUser();
+		sender.setUserId(userId);
+		return messageDao.findBySender(sender);
 	}
 
 	@Override
 	public List<Message> getMessagesByReceiver(long userId) {
-		return messageDao.getMessagesByReceiver(userId);
+		SystemUser reciever = new SystemUser();
+		reciever.setUserId(userId);
+		return messageDao.findByReceiver(reciever);
 	}
 
 	@Override
-	public String deleteMessage(Message message) {
-		return messageDao.deleteMessage(message);
+	public void deleteMessage(Message message) {
+		messageDao.delete(message);
 	}
 
 }

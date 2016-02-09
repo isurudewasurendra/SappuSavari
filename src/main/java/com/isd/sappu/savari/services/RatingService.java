@@ -6,7 +6,7 @@ import com.isd.sappu.savari.domains.Rating;
 
 public interface RatingService {
 
-	public long saveUpdateRating(Rating rating);
+	public Rating saveUpdateRating(Rating rating);
 	
 	public Rating getRating(long ratingId);
 	
@@ -16,7 +16,7 @@ public interface RatingService {
 	
 	public List<Rating> getRatingsByProductId(long productId);
 	
-	public String deleteRating(Rating rating);
+	public void deleteRating(Rating rating);
 	
 	public int calculateOverallRating(long productId);
 	

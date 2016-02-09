@@ -47,10 +47,6 @@ public class UserDetailsDTO implements UserDetails {
         	}
         }
         
-        for (UserRole userRole : userRoleList) {
-			System.out.println("---------"+userRole.getAuthority());
-		}
-        
        	this.grantedAuthorities.addAll(userRoleList);
 
     }

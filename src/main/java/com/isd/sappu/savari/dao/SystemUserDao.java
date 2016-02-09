@@ -2,18 +2,16 @@ package com.isd.sappu.savari.dao;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.isd.sappu.savari.domains.SystemUser;
 
-public interface SystemUserDao {
+public interface SystemUserDao extends CrudRepository<SystemUser, Long>{
 
-	public long saveUpdateSystemUser(SystemUser user);
+	public SystemUser findByUsername(String username);
 	
-	public SystemUser getSystemUserByUsername(String username);
+	public SystemUser findByUserId(long userId);
 	
-	public SystemUser getSystemUser(long userId);
-	
-	public String deleteSystemUser(SystemUser user);
-	
-	public List<SystemUser> getAllSystemUsers();
+	public List<SystemUser> findAll();
 	
 }

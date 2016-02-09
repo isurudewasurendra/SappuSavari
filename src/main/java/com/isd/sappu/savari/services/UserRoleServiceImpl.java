@@ -14,7 +14,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 
 	@Override
 	public UserRole getUserRoleByRole(String role) {
-		return userRoleDao.getUserRoleByRole(role);
+		return userRoleDao.findByAuthority(role);
 	}
 
 }

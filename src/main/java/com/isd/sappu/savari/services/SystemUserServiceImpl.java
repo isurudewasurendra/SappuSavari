@@ -15,28 +15,28 @@ public class SystemUserServiceImpl implements SystemUserService{
 	private SystemUserDao systemUserDao;
 	
 	@Override
-	public long saveUpdateSystemUser(SystemUser user) {
-		return systemUserDao.saveUpdateSystemUser(user);
+	public SystemUser saveUpdateSystemUser(SystemUser user) {
+		return systemUserDao.save(user);
 	}
 
 	@Override
 	public SystemUser getSystemUser(long userId) {
-		return systemUserDao.getSystemUser(userId);
+		return systemUserDao.findByUserId(userId);
 	}
 
 	@Override
-	public String deleteSystemUser(SystemUser user) {
-		return systemUserDao.deleteSystemUser(user);
+	public void deleteSystemUser(SystemUser user) {
+		systemUserDao.delete(user);
 	}
 
 	@Override
 	public SystemUser getSystemUserByUsername(String username) {
-		return systemUserDao.getSystemUserByUsername(username);
+		return systemUserDao.findByUsername(username);
 	}
 
 	@Override
 	public List<SystemUser> getAllSystemUsers() {
-		return systemUserDao.getAllSystemUsers();
+		return systemUserDao.findAll();
 	}
 
 }

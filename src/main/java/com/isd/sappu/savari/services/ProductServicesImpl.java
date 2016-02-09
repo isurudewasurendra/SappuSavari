@@ -13,6 +13,7 @@ import com.isd.sappu.savari.domains.Product;
 import com.isd.sappu.savari.domains.ProductCategory;
 import com.isd.sappu.savari.domains.ProductSubCategory;
 import com.isd.sappu.savari.domains.SearchRequest;
+import com.isd.sappu.savari.domains.SystemUser;
 import com.isd.sappu.savari.util.EnumConstant;
 
 @Service
@@ -29,17 +30,19 @@ public class ProductServicesImpl implements ProductService{
 	
 	@Override
 	public List<Product> getAllProducts() {
-		return productDao.getAllProducts();
+		return productDao.findAll();
 	}
 
 	@Override
 	public List<Product> getAllProductByUserId(long userId) {
-		return productDao.getAllProductsByUserId(userId);
+		SystemUser user = new SystemUser();
+		user.setUserId(userId);
+		return productDao.findProductByUser(user);
 	}
 
 	@Override
-	public long saveUpdateProduct(Product product) {
-		return productDao.saveUpdateProduct(product);
+	public Product saveUpdateProduct(Product product) {
+		return productDao.save(product);
 	}
 
 	@Override
@@ -51,13 +54,50 @@ public class ProductServicesImpl implements ProductService{
 		List<Product> productList = new ArrayList<Product>();
 		
 		if(productCategory.getCategoryName().equals(EnumConstant.ProductCategory.OTHER.toString())){
-			productList = productDao.getOtherProductList(searchRequest);
+			productList = productDao.getOtherProductList(
+					searchRequest.getProductSubCategory().getProductSubCategoryId(),
+					(searchRequest.getMinPrice()==0)?Double.MIN_VALUE:searchRequest.getMinPrice(),
+					(searchRequest.getMaxPrice()==0)?Double.MAX_VALUE:searchRequest.getMaxPrice(),
+					searchRequest.getAuthenticity(), (searchRequest.getAuthenticity()==null)?1:0,
+					searchRequest.getProductType(), (searchRequest.getProductType()==null)?1:0,
+					searchRequest.getBrand(), (searchRequest.getBrand()==null)?1:0,
+					searchRequest.getProductCondition(), (searchRequest.getProductCondition()==null)?1:0
+					);
 		}else if(productCategory.getCategoryName().equals(EnumConstant.ProductCategory.ELECTRONICS.toString())){
-			productList = productDao.getOtherProductList(searchRequest);
+			productList = productDao.getOtherProductList(
+					searchRequest.getProductSubCategory().getProductSubCategoryId(),
+					(searchRequest.getMinPrice()==0)?Double.MIN_VALUE:searchRequest.getMinPrice(),
+					(searchRequest.getMaxPrice()==0)?Double.MAX_VALUE:searchRequest.getMaxPrice(),
+					searchRequest.getAuthenticity(), (searchRequest.getAuthenticity()==null)?1:0,
+					searchRequest.getProductType(), (searchRequest.getProductType()==null)?1:0,
+					searchRequest.getBrand(), (searchRequest.getBrand()==null)?1:0,
+					searchRequest.getProductCondition(), (searchRequest.getProductCondition()==null)?1:0
+					);
 		}else if(productCategory.getCategoryName().equals(EnumConstant.ProductCategory.VEHICLE.toString())){
-			productList = productDao.getVehicleProductList(searchRequest);
+			productList = productDao.getVehicleProductList(
+					searchRequest.getProductSubCategory().getProductSubCategoryId(),
+					(searchRequest.getMinPrice()==0)?Double.MIN_VALUE:searchRequest.getMinPrice(),
+					(searchRequest.getMaxPrice()==0)?Double.MAX_VALUE:searchRequest.getMaxPrice(),
+					searchRequest.getProductType(), (searchRequest.getProductType()==null)?1:0,
+					searchRequest.getProductCondition(), (searchRequest.getProductCondition()==null)?1:0,
+					(searchRequest.getMinMillege()==0)?Integer.MIN_VALUE:searchRequest.getMinMillege(),
+					(searchRequest.getMaxMillege()==0)?Integer.MAX_VALUE:searchRequest.getMaxMillege(),
+					searchRequest.getTransmission(), (searchRequest.getTransmission()==null)?1:0,
+					searchRequest.getFuelType(), (searchRequest.getFuelType()==null)?1:0,
+					searchRequest.getBodyType(), (searchRequest.getBodyType()==null)?1:0
+					);
 		}else if(productCategory.getCategoryName().equals(EnumConstant.ProductCategory.PROPERTY.toString())){
-			productList = productDao.getPropertyProductList(searchRequest);
+			productList = productDao.getPropertyProductList(
+					searchRequest.getProductSubCategory().getProductSubCategoryId(),
+					(searchRequest.getMinPrice()==0)?Double.MIN_VALUE:searchRequest.getMinPrice(),
+					(searchRequest.getMaxPrice()==0)?Double.MAX_VALUE:searchRequest.getMaxPrice(),
+					searchRequest.getProductType(), (searchRequest.getProductType()==null)?1:0,
+					searchRequest.getProductCondition(), (searchRequest.getProductCondition()==null)?1:0,
+					(searchRequest.getMinNoOfBathroom()==0)?Integer.MIN_VALUE:searchRequest.getMinNoOfBathroom(),
+					(searchRequest.getMaxNoOfBathroom()==0)?Integer.MAX_VALUE:searchRequest.getMaxNoOfBathroom(),
+					(searchRequest.getMinNoOfRoom()==0)?Integer.MIN_VALUE:searchRequest.getMinNoOfRoom(),
+					(searchRequest.getMaxNoOfRoom()==0)?Integer.MAX_VALUE:searchRequest.getMaxNoOfRoom()
+					);
 		}
 		
 		return productList;
@@ -65,7 +105,7 @@ public class ProductServicesImpl implements ProductService{
 
 	@Override
 	public Product getProductById(long productId) {
-		return productDao.getProduct(productId);
+		return productDao.findOne(productId);
 	}
 
 	@Override
@@ -74,7 +114,7 @@ public class ProductServicesImpl implements ProductService{
 			List<Favorite> favoriteList = favoriteService.getFavoritesByUserId(userId);
 			List<Product> productList = new ArrayList<Product>();
 			for (Favorite favorite : favoriteList) {
-				productList.add(productDao.getProduct(favorite.getProduct().getProductId()));
+				productList.add(productDao.findOne(favorite.getProduct().getProductId()));
 			}
 			return productList;
 		} catch (Exception e) {
@@ -91,7 +131,7 @@ public class ProductServicesImpl implements ProductService{
 			List<Comment> commentList = commentService.getCommentListByUserId(userId);
 			List<Product> productList = new ArrayList<Product>();
 			for (Comment comment : commentList) {
-				productList.add(productDao.getProduct(comment.getProduct().getProductId()));
+				productList.add(productDao.findOne(comment.getProduct().getProductId()));
 			}
 			return productList;
 		} catch (Exception e) {

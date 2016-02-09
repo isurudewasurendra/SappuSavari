@@ -49,6 +49,30 @@ public class MessageController {
 		return new ModelAndView("messagedashboard", map);
 	}
 	
+	@RequestMapping(value="/messageInbox", method=RequestMethod.GET)
+	public ModelAndView getMessageInbox(HttpServletRequest request){
+		ModelMap map = new ModelMap();
+		
+		long userId = sessionUtil.getLoggedUserFromSession(AppConstant.LOGGED_USER, request).getUserId();
+		
+		List<Message> receivedMessages = messageService.getMessagesByReceiver(userId);
+		map.put("inboxMessages", receivedMessages);
+		
+		return new ModelAndView("messageInbox", map);
+	}
+	
+	@RequestMapping(value="/messageSent", method=RequestMethod.GET)
+	public ModelAndView getMessageSent(HttpServletRequest request){
+		ModelMap map = new ModelMap();
+		
+		long userId = sessionUtil.getLoggedUserFromSession(AppConstant.LOGGED_USER, request).getUserId();
+		
+		List<Message> sentMessages = messageService.getMessagesBySender(userId);
+		map.put("sentMessages", sentMessages);
+		
+		return new ModelAndView("messageSent", map);
+	}
+	
 	@RequestMapping(value="/createMessage", method=RequestMethod.GET)
 	public ModelAndView getCreateMessage(@RequestParam("owner") long receiverId, @RequestParam("productId") long productId, HttpServletRequest request){
 		ModelMap map = new ModelMap();

@@ -2,12 +2,12 @@ package com.isd.sappu.savari.dao;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.isd.sappu.savari.domains.ProductCategory;
 
-public interface ProductCategoryDao {
+public interface ProductCategoryDao extends CrudRepository<ProductCategory, Long>{
 
-	public long saveOrUpdateProductCategory(ProductCategory productCategory);
-	
-	public List<ProductCategory> getAllProductCategory();
+	public List<ProductCategory> findAll();
 	
 }

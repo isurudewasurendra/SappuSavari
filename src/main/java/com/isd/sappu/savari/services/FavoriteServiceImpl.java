@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.isd.sappu.savari.dao.FavoriteDao;
 import com.isd.sappu.savari.domains.Favorite;
+import com.isd.sappu.savari.domains.Product;
+import com.isd.sappu.savari.domains.SystemUser;
 
 @Service
 public class FavoriteServiceImpl implements FavoriteService {
@@ -15,33 +17,42 @@ public class FavoriteServiceImpl implements FavoriteService {
 	private FavoriteDao favoriteDao;
 	
 	@Override
-	public long saveUpdateFavorite(Favorite favorite) {
-		return favoriteDao.saveUpdateFavorite(favorite);
+	public Favorite saveUpdateFavorite(Favorite favorite) {
+		return favoriteDao.save(favorite);
 	}
 
 	@Override
 	public Favorite getFavorite(long favoriteId) {
-		return favoriteDao.getFavorite(favoriteId);
+		return favoriteDao.findByFavoriteId(favoriteId);
 	}
 
 	@Override
 	public List<Favorite> getFavoritesByUserId(long userId) {
-		return favoriteDao.getFavoritesByUserId(userId);
+		SystemUser user = new SystemUser();
+		user.setUserId(userId);
+		return favoriteDao.findByUser(user);
 	}
 
 	@Override
 	public List<Favorite> getFavoritesByProductId(long productId) {
-		return favoriteDao.getFavoritesByProductId(productId);
+		Product product = new Product();
+		product.setProductId(productId);
+		return favoriteDao.findByProduct(product);
 	}
+	
 
 	@Override
-	public String deleteFavorite(Favorite favorite) {
-		return favoriteDao.deleteFavorite(favorite);
+	public void deleteFavorite(Favorite favorite) {
+		favoriteDao.delete(favorite);
 	}
 
 	@Override
 	public Favorite getFavorite(long userId, long productId) {
-		return favoriteDao.getFavorite(userId, productId);
+		SystemUser user = new SystemUser();
+		user.setUserId(userId);
+		Product product = new Product();
+		product.setProductId(productId);
+		return favoriteDao.findByUserAndProduct(user, product);
 	}
 
 }

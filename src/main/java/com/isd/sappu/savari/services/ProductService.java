@@ -7,7 +7,7 @@ import com.isd.sappu.savari.domains.SearchRequest;
 
 public interface ProductService {
 	
-	public long saveUpdateProduct(Product product);
+	public Product saveUpdateProduct(Product product);
 	
 	public Product getProductById(long productId);
 	

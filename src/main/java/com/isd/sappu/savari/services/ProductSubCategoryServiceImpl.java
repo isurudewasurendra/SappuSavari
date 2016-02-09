@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.isd.sappu.savari.dao.ProductSubCategoryDao;
+import com.isd.sappu.savari.domains.ProductCategory;
 import com.isd.sappu.savari.domains.ProductSubCategory;
 
 @Service
@@ -16,17 +17,19 @@ public class ProductSubCategoryServiceImpl implements ProductSubCategoryService 
 	
 	@Override
 	public List<ProductSubCategory> getAllProductSubCategories() {
-		return productSubCategoryDao.getAllProductSubCategories();
+		return productSubCategoryDao.findAll();
 	}
 
 	@Override
 	public List<ProductSubCategory> getAllProductSubCategoriesByProductCategoryId(long productCategoryId) {
-		return productSubCategoryDao.getAllProductSubCategoriesByProductCategoryId(productCategoryId);
+		ProductCategory productCategory = new ProductCategory();
+		productCategory.setProductCategoryId(productCategoryId);
+		return productSubCategoryDao.findByProductCategory(productCategory);
 	}
 
 	@Override
 	public ProductSubCategory getProductSubCategoryById(long productSubCategoryId) {
-		return productSubCategoryDao.getProductSubCategoryById(productSubCategoryId);
+		return productSubCategoryDao.findOne(productSubCategoryId);
 	}
 
 }

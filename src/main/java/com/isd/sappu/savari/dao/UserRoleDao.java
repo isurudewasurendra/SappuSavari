@@ -1,9 +1,10 @@
 package com.isd.sappu.savari.dao;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.isd.sappu.savari.domains.UserRole;
 
-public interface UserRoleDao {
+public interface UserRoleDao extends CrudRepository<UserRole, Long>{
 
-	public UserRole getUserRoleByRole(String role);
-	
+	UserRole findByAuthority(String authority);
 }

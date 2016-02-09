@@ -2,6 +2,8 @@ package com.isd.sappu.savari.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +93,25 @@ public class NotificationDaoImpl implements NotificationDao {
             		.setParameter("productId", productId)
             		.setParameter("userId", userId)
             		.uniqueResult();
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Override
+	@Transactional
+	public Notification getNotification(long userId, long productId, String notificationType) {
+		try{
+			Session session = sessionFactory.openSession();
+			return (Notification) session.createQuery("from Notification where product.productId = :productId and user.userId = :userId and notificationType=:notificationType")
+            		.setParameter("productId", productId)
+            		.setParameter("userId", userId)
+            		.setParameter("notificationType", notificationType)
+            		.uniqueResult();
+		}catch(NoResultException e){
+			e.printStackTrace();
+			return null;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;

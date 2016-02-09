@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.isd.sappu.savari.dao.RatingDao;
+import com.isd.sappu.savari.domains.Product;
 import com.isd.sappu.savari.domains.Rating;
+import com.isd.sappu.savari.domains.SystemUser;
 
 @Service
 public class RatingServiceImpl implements RatingService {
@@ -14,32 +16,33 @@ public class RatingServiceImpl implements RatingService {
 	@Autowired
 	private RatingDao ratingDao;
 	
-	@Autowired
-	private ProductService productService;
-	
 	@Override
-	public long saveUpdateRating(Rating rating) {
-		return ratingDao.saveUpdateRating(rating);
+	public Rating saveUpdateRating(Rating rating) {
+		return ratingDao.save(rating);
 	}
 
 	@Override
 	public Rating getRating(long ratingId) {
-		return ratingDao.getRating(ratingId);
+		return ratingDao.findByRatingId(ratingId);
 	}
 
 	@Override
 	public List<Rating> getRatingsByUserId(long userId) {
-		return ratingDao.getRatingsByUserId(userId);
+		SystemUser user = new SystemUser();
+		user.setUserId(userId);
+		return ratingDao.findByUser(user);
 	}
 
 	@Override
 	public List<Rating> getRatingsByProductId(long productId) {
-		return ratingDao.getRatingsByProductId(productId);
+		Product product = new Product();
+		product.setProductId(productId);
+		return ratingDao.findByProduct(product);
 	}
 
 	@Override
-	public String deleteRating(Rating rating) {
-		return ratingDao.deleteRating(rating);
+	public void deleteRating(Rating rating) {
+		ratingDao.delete(rating);
 	}
 
 	@Override
@@ -53,12 +56,20 @@ public class RatingServiceImpl implements RatingService {
 			ratingSum = ratingSum + rating.getRating();
 		}
 		
-		return ratingSum/ratingCount;
+		if(ratingCount>0 && ratingSum>0){
+			return ratingSum/ratingCount;
+		}else{
+			return 0;
+		}
 	}
 
 	@Override
 	public Rating getRating(long userId, long productId) {
-		return ratingDao.getRating(userId, productId);
+		SystemUser user = new SystemUser();
+		user.setUserId(userId);
+		Product product = new Product();
+		product.setProductId(productId);
+		return ratingDao.findByUserAndProduct(user, product);
 	}
 
 }

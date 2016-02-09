@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Null;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,7 +53,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="userprofile", method=RequestMethod.POST)
-	public String getUserProfile(@RequestParam("inputProfilePic") @Null CommonsMultipartFile profilePicture, HttpServletRequest request){
+	public String getUserProfile(@RequestParam("inputProfilePic") CommonsMultipartFile profilePicture, HttpServletRequest request){
 		long userId = Long.parseLong(request.getParameter("UserId"));
 		String firstName = request.getParameter("inputFirstName");
 		String lastName = request.getParameter("inputLastName");

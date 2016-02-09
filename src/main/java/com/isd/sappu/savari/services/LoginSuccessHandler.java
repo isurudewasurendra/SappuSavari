@@ -30,6 +30,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	public void onAuthenticationSuccess(HttpServletRequest request,
 			HttpServletResponse response, Authentication authentication) throws IOException,
 			ServletException {
+		System.out.println("CAME HERE onAuthenticationSuccess");
 		
 		if(authentication != null){
 			Object principal = authentication.getPrincipal();

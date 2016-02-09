@@ -6,19 +6,14 @@
 
     <definition name="home.layout" template="/WEB-INF/views/layouts/homelayout.jsp">
         <put-attribute name="title-position" value="Template" />
-        <put-attribute name="topnavbar-position" value="/WEB-INF/views/commons/topnavbar.jsp" />
         <put-attribute name="header-position" value="/WEB-INF/views/commons/header.jsp" />
-        <put-attribute name="midnavbar-position" value="/WEB-INF/views/commons/midnavbar.jsp" />
         <put-attribute name="body-position" value="" />      
         <put-attribute name="footer-position" value="/WEB-INF/views/commons/footer.jsp" />
     </definition>
     
     <definition name="login.layout" template="/WEB-INF/views/layouts/loginlayout.jsp">
         <put-attribute name="title-position" value="Template" />
-        <put-attribute name="topnavbar-position" value="/WEB-INF/views/commons/topnavbar.jsp" />
-        <put-attribute name="header-position" value="/WEB-INF/views/commons/login_header.jsp" />
         <put-attribute name="body-position" value="" />      
-        <put-attribute name="footer-position" value="/WEB-INF/views/commons/footer.jsp" />
     </definition>
     
     <!-- login page -->
@@ -139,6 +134,14 @@
     <definition name="messagedashboard" extends="home.layout">
         <put-attribute name="title" value="Messages" />
         <put-attribute name="body-position" value="/WEB-INF/views/content/message/messageDashboard.jsp" />   
+    </definition>
+    <definition name="messageInbox" extends="home.layout">
+        <put-attribute name="title" value="Messages" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/message/messageInbox.jsp" />   
+    </definition>
+    <definition name="messageSent" extends="home.layout">
+        <put-attribute name="title" value="Messages" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/message/messageSent.jsp" />   
     </definition>
     
     <!-- create message page-->

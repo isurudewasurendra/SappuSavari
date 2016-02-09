@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.isd.sappu.savari.dao.NotificationDao;
 import com.isd.sappu.savari.domains.Notification;
+import com.isd.sappu.savari.domains.Product;
+import com.isd.sappu.savari.domains.SystemUser;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
@@ -15,33 +17,41 @@ public class NotificationServiceImpl implements NotificationService {
 	private NotificationDao notificationDao;
 	
 	@Override
-	public long saveUpdateNotification(Notification notification) {
-		return notificationDao.saveUpdateNotification(notification);
+	public Notification saveUpdateNotification(Notification notification) {
+		return notificationDao.save(notification);
 	}
 
 	@Override
 	public Notification getNotification(long notificationId) {
-		return notificationDao.getNotification(notificationId);
+		return notificationDao.findOne(notificationId);
 	}
 
 	@Override
 	public List<Notification> getNotificationsByUserId(long userId) {
-		return notificationDao.getNotificationsByUserId(userId);
+		SystemUser user = new SystemUser();
+		user.setUserId(userId);
+		return notificationDao.findByUser(user);
 	}
 
 	@Override
 	public List<Notification> getNotificationsByProductId(long productId) {
-		return notificationDao.getNotificationsByProductId(productId);
+		Product product = new Product();
+		product.setProductId(productId);
+		return notificationDao.findByProduct(product);
 	}
 
 	@Override
-	public String deleteNotification(Notification notification) {
-		return notificationDao.deleteNotification(notification);
+	public void deleteNotification(Notification notification) {
+		notificationDao.delete(notification);
 	}
 
 	@Override
 	public Notification getNotification(long userId, long productId) {
-		return notificationDao.getNotification(userId, productId);
+		SystemUser user = new SystemUser();
+		user.setUserId(userId);
+		Product product = new Product();
+		product.setProductId(productId);
+		return notificationDao.findByUserAndProduct(user, product);
 	}
 
 }

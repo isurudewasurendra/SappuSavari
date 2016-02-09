@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.isd.sappu.savari.dao.SearchRequestDao;
 import com.isd.sappu.savari.domains.SearchRequest;
+import com.isd.sappu.savari.domains.SystemUser;
 import com.isd.sappu.savari.util.EnumConstant;
 
 @Service
@@ -17,22 +18,24 @@ public class SearchRequestServiceImpl implements SearchRequestService{
 	
 	@Override
 	public SearchRequest getSearchRequestById(long searchRequestId) {
-		return searchRequestDao.getSearchRequestById(searchRequestId);
+		return searchRequestDao.findOne(searchRequestId);
 	}
 
 	@Override
-	public long saveUpdateSearchRequest(SearchRequest searchRequest) {
-		return searchRequestDao.saveUpdateSearchRequest(searchRequest);
+	public SearchRequest saveUpdateSearchRequest(SearchRequest searchRequest) {
+		return searchRequestDao.save(searchRequest);
 	}
 
 	@Override
 	public List<SearchRequest> getAllSearchRequestByUserId(long userId) {
-		return searchRequestDao.getAllSearchRequestByUserId(userId);
+		SystemUser user = new SystemUser();
+		user.setUserId(userId);
+		return searchRequestDao.findByUser(user);
 	}
 
 	@Override
-	public String deleteSearchRequest(long searchRequestId) {
-		return searchRequestDao.deleteSearchRequest(searchRequestId);
+	public void deleteSearchRequest(long searchRequestId) {
+		searchRequestDao.delete(searchRequestId);
 	}
 
 	@Override

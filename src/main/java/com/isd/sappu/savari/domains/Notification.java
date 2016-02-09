@@ -1,5 +1,6 @@
 package com.isd.sappu.savari.domains;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="notification")
-public class Notification {
+public class Notification implements Serializable{
 
 	private static final long serialVersionUID = 5489679679570043539L;
 

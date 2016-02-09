@@ -6,11 +6,11 @@ import com.isd.sappu.savari.domains.Comment;
 
 public interface CommentService {
 
-	public long saveUpdateComment(Comment comment);
+	public Comment saveUpdateComment(Comment comment);
 	
 	public Comment getComment(long commentId);
 	
-	public String deleteComment(Comment comment);
+	public void deleteComment(Comment comment);
 	
 	public List<Comment> getCommentListByProductId(long productId);
 

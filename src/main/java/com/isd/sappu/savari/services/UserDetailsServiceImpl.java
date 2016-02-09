@@ -22,7 +22,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		try {
     		SystemUser user = systemUserService.getSystemUserByUsername(username);
     		System.out.println("====logged user===="+user.getUsername());
-    		System.out.println("====logged user roles===="+user.getSystemUserRoleList().get(0).getUserRole().getAuthority());
     		throwExceptionIfNotFound(user, username);
     		return new UserDetailsDTO(user);
 		} catch (Exception e) {

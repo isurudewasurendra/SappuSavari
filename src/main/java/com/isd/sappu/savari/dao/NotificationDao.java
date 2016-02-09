@@ -2,20 +2,20 @@ package com.isd.sappu.savari.dao;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.isd.sappu.savari.domains.Notification;
+import com.isd.sappu.savari.domains.Product;
+import com.isd.sappu.savari.domains.SystemUser;
 
-public interface NotificationDao {
+public interface NotificationDao extends CrudRepository<Notification, Long>{
 
-	public long saveUpdateNotification(Notification notification);
+	public Notification findByNotificationId(long notificationId);
 	
-	public Notification getNotification(long notificationId);
+	public Notification findByUserAndProduct(SystemUser user, Product product);
 	
-	public Notification getNotification(long userId, long productId);
+	public List<Notification> findByUser(SystemUser user);
 	
-	public List<Notification> getNotificationsByUserId(long userId);
-	
-	public List<Notification> getNotificationsByProductId(long productId);
-	
-	public String deleteNotification(Notification notification);
+	public List<Notification> findByProduct(Product product);
 	
 }

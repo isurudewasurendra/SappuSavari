@@ -1,19 +1,41 @@
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
+<div id="login" class="animate form">
+	<section class="login_content">
+		<form role="form" method="post" action="<c:url value='/login_check' />" onsubmit="return true">
+			<h1>Login Form</h1>
+			<div>
+				<input class="form-control" type="text" id="inputEmail" name="username" placeholder="UserName" required autofocus />
+			</div>
+			<div>
+				<input class="form-control" type="password" name="password" id="password" placeholder="Password" required="">
+			</div>
+			<div>
+				<input type="submit" class="btn btn-default submit" value="Login" />
+				<a href="signup.htm">SignUp</a>
+			</div>
+			<div class="clearfix"></div>
+			<div class="separator">
 
+				<div class="clearfix"></div>
+				<br />
+				<div>
+					<h1>
+						<i class="fa fa-area-chart" style="font-size: 26px;"></i> NBRO
+					</h1>
+					Copyright © 2016 National Building Research Organisation.<a>
+						All Rights Reserved.</a>
 
-<div class="wrapper">
-   <form class="form-signin" name="f" action='<c:url value="../login/login_check" />' method="POST" >      
-     <h2 class="form-signin-heading">Please login</h2>
-     <input id="username" type='text' name='username' class="form-control" placeholder="Email Address" />
-     <input id="password" type='password' name='password' class="form-control" placeholder="Password"/>      
-     <label class="checkbox">
-       <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
-     </label>
-     <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
-     <a href="signup.htm"><button class="btn btn-lg btn-primary btn-block" type="button">SignUp</button></a>
-   </form>
- </div>
+				</div>
+			</div>
+		</form>
+		<div class="panel-footer">
+   	 		<c:if test="${not empty param.login_error}">
+			    <div class="alert alert-danger">
+		          INVALID USERNAME OR PASSWORD
+		       	</div>
+			</c:if>
+        </div>
+	</section>
+</div>

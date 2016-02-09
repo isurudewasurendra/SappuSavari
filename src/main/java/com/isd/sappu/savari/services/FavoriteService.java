@@ -6,7 +6,7 @@ import com.isd.sappu.savari.domains.Favorite;
 
 public interface FavoriteService {
 
-	public long saveUpdateFavorite(Favorite favorite);
+	public Favorite saveUpdateFavorite(Favorite favorite);
 	
 	public Favorite getFavorite(long favoriteId);
 	
@@ -16,6 +16,6 @@ public interface FavoriteService {
 	
 	public List<Favorite> getFavoritesByProductId(long productId);
 	
-	public String deleteFavorite(Favorite favorite);
+	public void deleteFavorite(Favorite favorite);
 	
 }

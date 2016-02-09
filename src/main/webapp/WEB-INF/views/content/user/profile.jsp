@@ -12,10 +12,6 @@
   	<a href="#" data-toggle=".container" id="sidebar-toggle"> <span class="bar"></span> <span class="bar"></span> <span class="bar"></span> </a>
   	<div class="content">
   	
-  		<div>
-  			<a href="viewSearchHistory.htm?userId=${systemUser.userId}"><button>View My Search History</button></a>
-  		</div>
-  	
     	<form class="form-horizontal" action="userprofile.htm" method="POST" enctype="multipart/form-data">
     		<input type="hidden" name="UserId" value="${systemUser.userId}" />
 		  <div class="form-group">

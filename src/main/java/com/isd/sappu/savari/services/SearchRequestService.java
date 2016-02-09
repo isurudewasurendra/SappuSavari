@@ -8,9 +8,9 @@ public interface SearchRequestService {
 
 	public SearchRequest getSearchRequestById(long searchRequestId);
 	
-	public long saveUpdateSearchRequest(SearchRequest searchRequest);
+	public SearchRequest saveUpdateSearchRequest(SearchRequest searchRequest);
 	
-	public String deleteSearchRequest(long searchRequestId);
+	public void deleteSearchRequest(long searchRequestId);
 	
 	public String deleteUserSearchRequst(long userId);
 	
