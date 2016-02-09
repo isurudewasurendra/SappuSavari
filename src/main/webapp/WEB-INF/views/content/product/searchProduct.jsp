@@ -3,13 +3,20 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="main-content">
-  <div class="swipe-area"></div>
-  <a href="#" data-toggle=".container" id="sidebar-toggle"> <span class="bar"></span> <span class="bar"></span> <span class="bar"></span> </a>
-  <div class="content">
-    <h1>What are you searching ???</h1>
-    	<div class="container-fluid">
-    		<form action="searchProduct.htm" method="POST">
+<div class="row">
+	<div class="x_panel">
+		<div class="x_title">
+			<h2>
+				What are you searching ???
+			</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i	class="fa fa-chevron-up"></i></a></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+		
+	        <form action="searchProduct.htm" method="POST">
     		
     			<input type="hidden" name="productSubCategoryId" value="${productSubCategoryId}" />
    				<input type="hidden" name="popularAreaId" value="${popularAreaId}" />
@@ -165,12 +172,12 @@
 				  
 				  <div class="form-group">
 				    <div class="col-sm-offset-2 col-sm-10">
-				      <button type="submit" class="btn btn-default">Search</button>
+				      <button type="submit" class="btn btn-primary col-md-2 col-sm-2">Search</button>
 				    </div>
 				  </div>
     		
     		</form>
-    	</div>
-    </div>
+		
+		</div>
+	</div>
 </div>
-

@@ -3,13 +3,20 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="main-content">
-  <div class="swipe-area"></div>
-  <a href="#" data-toggle=".container" id="sidebar-toggle"> <span class="bar"></span> <span class="bar"></span> <span class="bar"></span> </a>
-  <div class="content">
-    <h1>Touch Swipeable Sidebar Menu Demo</h1>
-    	<div class="container-fluid">
-    		<div class="row">
+<div class="row">
+	<div class="x_panel">
+		<div class="x_title">
+			<h2>
+				Products
+			</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i	class="fa fa-chevron-up"></i></a></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+		
+	        <div class="row">
 			  <div class="col-sm-1">Preview</div>
 			  <div class="col-sm-3">Title</div>
 			  <div class="col-sm-5">Description</div>
@@ -25,10 +32,10 @@
 				  <div class="col-sm-1">${product.productStatus}</div>
 				</div>
 			</c:forEach>
-    		
-    	</div>
-    	<br/><hr/>
+		
+		<br/><hr/>
     	<a href="listProductCategory.htm" class="btn btn-primary btn-lg">Add More Product</a>
-    </div>
+		
+		</div>
+	</div>
 </div>
-

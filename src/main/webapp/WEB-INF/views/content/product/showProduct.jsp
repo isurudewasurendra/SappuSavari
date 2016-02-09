@@ -39,16 +39,20 @@
 
 </style>
 
-<div class="main-content">
-  <div class="swipe-area"></div>
-  <a href="#" data-toggle=".container" id="sidebar-toggle"> <span class="bar"></span> <span class="bar"></span> <span class="bar"></span> </a>
-  <div class="content">
-    	<div class="container-fluid">
-    	
-    		<h3>${product.productTitle}</h3>
-    		
-			
-    		<c:forEach var="multimedia" items="${productMultimediaList}">
+<div class="row">
+	<div class="x_panel">
+		<div class="x_title">
+			<h2>
+				${product.productTitle}
+			</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i	class="fa fa-chevron-up"></i></a></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+		
+	        <c:forEach var="multimedia" items="${productMultimediaList}">
     			<div>
     				<img src="../download/getProductImage.htm?fname=${multimedia.media}" height="100px"/>
     			</div>
@@ -93,9 +97,9 @@
 			
 			<br/><br/><br/>
 			<a href="../message/createMessage.htm?owner=${product.user.userId}&productId=${product.productId}">Send Message To the owner</a>
-    	
-    	</div>
-    </div>
+		
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript">

@@ -3,16 +3,23 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="main-content">
-  <div class="swipe-area"></div>
-  <a href="#" data-toggle=".container" id="sidebar-toggle"> <span class="bar"></span> <span class="bar"></span> <span class="bar"></span> </a>
-  <div class="content">
-    <h1>Select District</h1>
-    	<div class="container-fluid">
-			<c:forEach var="district" items="${districtList}">
+<div class="row">
+	<div class="x_panel">
+		<div class="x_title">
+			<h2>
+				Select District
+			</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i	class="fa fa-chevron-up"></i></a></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+		
+	        <c:forEach var="district" items="${districtList}">
 				<a href="listPopularArea.htm?pscid=${productSubCategoryId}&did=${district.districtId}" class="btn btn-default">${district.districtName}</a>
 			</c:forEach>
-    	</div>
-    </div>
+		
+		</div>
+	</div>
 </div>
-

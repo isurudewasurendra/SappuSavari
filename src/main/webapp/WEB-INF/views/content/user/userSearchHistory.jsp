@@ -3,21 +3,29 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="main-content">
-  <div class="swipe-area"></div>
-  <a href="#" data-toggle=".container" id="sidebar-toggle"> <span class="bar"></span> <span class="bar"></span> <span class="bar"></span> </a>
-  <div class="content">
-    <h1>Search Result</h1>
-    	<div class="container-fluid">
+<div class="row">
+	<div class="x_panel">
+		<div class="x_title">
+			<h2>
+				Search Result
+			</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i	class="fa fa-chevron-up"></i></a></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+		
 			<c:forEach var="searchRequest" items="${searchRequestList}">
 				<div>
 					product Id:${searchRequest.searchRequestId}
-					<a href="removeearchHistory.htm?shId=${searchRequest.searchRequestId}">remove</a>
+					<a class="btn btn-primary col-md-2 col-sm-2" href="removeearchHistory.htm?shId=${searchRequest.searchRequestId}">remove</a>
 				</div>
-			</c:forEach>    
+			</c:forEach> 
 			
-			<a href="removeAllearchHistory.htm?userId=${sessionScope.LOGGED_USER.userId}">Clear All</a> 		
-    	</div>
-    </div>
+			<a class="btn btn-primary col-md-2 col-sm-2" href="removeAllearchHistory.htm?userId=${sessionScope.LOGGED_USER.userId}">Clear All</a> 
+		
+		</div>
+	</div>
 </div>
 
