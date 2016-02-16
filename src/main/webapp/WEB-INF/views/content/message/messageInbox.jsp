@@ -3,22 +3,39 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<div class="main-content">
-  <div class="swipe-area"></div>
-  <a href="#" data-toggle=".container" id="sidebar-toggle"> <span class="bar"></span> <span class="bar"></span> <span class="bar"></span> </a>
-  <div class="content">
-    <h1>Messages</h1>
-    	<div class="container-fluid">
-    	
-    		<h2>Inbox</h2><hr/>
-    		<div>
-    			<c:forEach var="message" items="${inboxMessages}">
-    				<span>${message.messageId}</span>
-    				<span>${message.message}</span>
+<div class="row">
+	<div class="x_panel">
+		<div class="x_title">
+			<h2>
+				Inbox
+			</h2>
+			<ul class="nav navbar-right panel_toolbox">
+				<li><a class="collapse-link"><i	class="fa fa-chevron-up"></i></a></li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
+		
+			<table class="table table-striped table-bordered" id="buildingLotsTable">
+				<tr>
+					<th>No</th>
+					<th>From</th>
+					<th>Date</th>
+					<th>Subject</th>
+					<th>Content</th>
+				</tr>
+				<c:forEach var="message" items="${inboxMessages}" varStatus="count">
+					<tr>
+						<td>${count.index+1}</td>
+						<td>${message.sender.username}</td>
+						<td>${message.createdDateTime}</td>
+						<td>${message.subject}</td>
+						<td>${message.message}</td>
+					</tr>
     			</c:forEach>
-    		</div>
-    		
-    	</div>
-    </div>
+			</table>
+		
+		</div>
+	</div>
 </div>
 

@@ -21,7 +21,7 @@ public class SystemUserServiceImpl implements SystemUserService{
 
 	@Override
 	public SystemUser getSystemUser(long userId) {
-		return systemUserDao.findByUserId(userId);
+		return systemUserDao.findOne(userId);
 	}
 
 	@Override

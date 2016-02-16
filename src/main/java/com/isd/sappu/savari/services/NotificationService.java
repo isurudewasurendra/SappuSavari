@@ -10,9 +10,11 @@ public interface NotificationService {
 	
 	public Notification getNotification(long notificationId);
 	
-	public Notification getNotification(long userId, long productId);
+	public List<Notification> getNotification(long userId, long productId);
 	
 	public List<Notification> getNotificationsByUserId(long userId);
+	
+	public List<Notification> getNewNotificationsByUserId(long userId);
 	
 	public List<Notification> getNotificationsByProductId(long productId);
 	

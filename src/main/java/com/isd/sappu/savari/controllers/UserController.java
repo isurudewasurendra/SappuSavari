@@ -1,5 +1,6 @@
 package com.isd.sappu.savari.controllers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.isd.sappu.savari.domains.FollowSeller;
+import com.isd.sappu.savari.domains.Product;
 import com.isd.sappu.savari.domains.SearchRequest;
 import com.isd.sappu.savari.domains.SystemUser;
+import com.isd.sappu.savari.services.FollowSellerService;
+import com.isd.sappu.savari.services.ProductService;
 import com.isd.sappu.savari.services.SearchRequestService;
 import com.isd.sappu.savari.services.SystemUserService;
 import com.isd.sappu.savari.util.AppConstant;
@@ -43,6 +48,12 @@ public class UserController {
 	
 	@Autowired
 	SessionUtil sessionUtil;
+	
+	@Autowired
+	ProductService productService;
+	
+	@Autowired
+	FollowSellerService followSellerService;
 
 	@RequestMapping(value="userprofile", method=RequestMethod.GET)
 	public ModelAndView getUserProfile(@RequestParam("username") String username){
@@ -105,6 +116,17 @@ public class UserController {
 		return "redirect:viewSearchHistory.htm?userId="+sessionUtil.getLoggedUserFromSession(AppConstant.LOGGED_USER, request).getUserId();
 	}
 	
+	@RequestMapping(value="userSearchHistory", method=RequestMethod.GET)
+	public ModelAndView getSearchPage(@RequestParam("shId") long searchRequestId, HttpServletRequest request){
+		ModelMap map = new ModelMap();
+		SearchRequest searchRequest = searchRequestService.getSearchRequestById(searchRequestId);
+		//search Products
+		List<Product> productList = productService.getSearchedProductList(searchRequest);
+		map.put("productList", productList);
+		
+		return new ModelAndView("listsearchresult", map);
+	}
+	
 	@RequestMapping(value="updateUserLocation", method=RequestMethod.POST)
 	public @ResponseBody String updateLocation(@RequestParam("userId") long userId, @RequestParam("latt") double latitude, @RequestParam("longt") double longtitude, @RequestParam("acc") int accuracy, HttpServletRequest request){
 		SystemUser systemUser = systemUserService.getSystemUser(userId);
@@ -129,26 +151,31 @@ public class UserController {
 	@RequestMapping(value="getSystemUser", method=RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getSystemUser(@RequestParam("userId") long userId, HttpServletRequest request){
 		SystemUser systemUser = systemUserService.getSystemUser(userId);
+		System.out.println(systemUser.toMap().toString());
 		return systemUser.toMap();
 	}
 	
 	
-	@RequestMapping(value="followUser", method=RequestMethod.GET)
-	public ModelAndView getFollowUser(@RequestParam("fromUserId") long fromUserId, @RequestParam("toUserId") long toUserId ,
-			@RequestParam("travelMode") String travelMode, HttpServletRequest request){
+	@RequestMapping(value="followSeller", method=RequestMethod.GET)
+	public String getFollowUser(@RequestParam("userId") long userId, @RequestParam("proId") long productId, HttpServletRequest request){
 		ModelMap map = new ModelMap();
 		
-		SystemUser fromUser = systemUserService.getSystemUser(fromUserId);
-		SystemUser toUser = systemUserService.getSystemUser(toUserId);
+		SystemUser seller = systemUserService.getSystemUser(userId);
+		SystemUser buyer = systemUserService.getSystemUser(sessionUtil.getLoggedUserFromSession(AppConstant.LOGGED_USER, request).getUserId());
+		Product product = productService.getProductById(productId);
 		
-		map.put("fromUser", fromUser);
-		map.put("toUser", toUser);
-		if(travelMode.equals("walking")){
-			map.put("travelMode", "WALKING");
-		}else{
-			map.put("travelMode", "DRIVING");
-		}
+		FollowSeller followSeller = new FollowSeller();
+		followSeller.setCreatedDateTime(new Date());
+		followSeller.setBuyerId(buyer.getUserId());
+		followSeller.setProductId(product.getProductId());
+		followSeller.setProductTitle(product.getProductTitle());
+		followSeller.setSellerId(seller.getUserId());
+		followSeller.setSellerLatitude(seller.getLatitude());
+		followSeller.setSellerLongtitude(seller.getLongtitude());
+		followSeller.setSellerName(seller.getFirstName());
 		
-		return new ModelAndView("userfollow", map);
+		followSellerService.saveUpdateFollowSeller(followSeller);
+		
+		return "redirect:/product/showProduct.htm?productId="+product.getProductId();
 	}
 }

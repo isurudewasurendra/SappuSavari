@@ -18,9 +18,15 @@ public class RatingServiceImpl implements RatingService {
 	
 	@Override
 	public Rating saveUpdateRating(Rating rating) {
-		return ratingDao.save(rating);
+		Rating rate = this.getRating(rating.getUser().getUserId(), rating.getProduct().getProductId());
+		if(rate != null){
+			rate.setRating(rating.getRating());
+			return ratingDao.save(rate);
+		}else{
+			return ratingDao.save(rating);
+		}
 	}
-
+	
 	@Override
 	public Rating getRating(long ratingId) {
 		return ratingDao.findByRatingId(ratingId);

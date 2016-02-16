@@ -32,6 +32,13 @@ public class NotificationServiceImpl implements NotificationService {
 		user.setUserId(userId);
 		return notificationDao.findByUser(user);
 	}
+	
+	@Override
+	public List<Notification> getNewNotificationsByUserId(long userId) {
+		SystemUser user = new SystemUser();
+		user.setUserId(userId);
+		return notificationDao.findByUserAndSeenStatus(user, 0);
+	}
 
 	@Override
 	public List<Notification> getNotificationsByProductId(long productId) {
@@ -46,12 +53,12 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public Notification getNotification(long userId, long productId) {
+	public List<Notification> getNotification(long userId, long productId) {
 		SystemUser user = new SystemUser();
 		user.setUserId(userId);
 		Product product = new Product();
 		product.setProductId(productId);
-		return notificationDao.findByUserAndProduct(user, product);
+		return (List<Notification>) notificationDao.findByUserAndProduct(user, product);
 	}
 
 }

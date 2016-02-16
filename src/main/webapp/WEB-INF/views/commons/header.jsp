@@ -37,7 +37,6 @@
 							<li><a href="../message/messageSent.htm">Sent</a></li>
 						</ul>
 					</li>
-					<li><a href="officeUseOnly.htm?id=${param['id']}"><i class="fa fa-linux"></i>Office Use</a></li>
 				</ul>
 			</div>
 		</div>
@@ -58,18 +57,28 @@
 				<li class="">
 					<a href="javascript:;"
 					class="user-profile dropdown-toggle" data-toggle="dropdown"
-					aria-expanded="false"> <img src="<c:url value="/images/img.jpg"/>" alt="">${sessionScope.SESSION_USER_DISPLAY_NAME}
+					aria-expanded="false"> <img src="<c:url value="/images/img.jpg"/>" alt="">
 					<span class=" fa fa-angle-down"></span>
 					</a>
-					<ul
-						class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+					<ul	class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
 						<li><a href="../user/userprofile.htm?username=${sessionScope.LOGGED_USER.username}"> Profile</a></li>
 						<li><a href="../user/viewSearchHistory.htm?userId=${sessionScope.LOGGED_USER.userId}"> Search History</a></li>
+						<li><a href="../notification/notificatoinDashBoard.htm?userId=${sessionScope.LOGGED_USER.userId}">Notification</a></li>
 						<li><a href="../login/logout.htm"><i	class="fa fa-sign-out pull-right"></i> Log Out</a></li>
 					</ul>
 				</li>
 				<li class="">
-                    <a href="../buy/listProductCategory.htm"><i class="fa fa-search"></i> <span class="badge bg-green"> advance Search</span></a>
+					<a href="javascript:;"
+					class="user-profile dropdown-toggle" data-toggle="dropdown"
+					aria-expanded="false"> <img src="<c:url value="/images/bell.png"/>" alt="">
+					<span class=" fa fa-angle-down"></span>
+					</a>
+					<ul	class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right" id="notificationUl">
+						
+					</ul>
+				</li>
+				<li class="">
+                    <a href="../user/userprofile.htm?username=${sessionScope.LOGGED_USER.username}"><span class="badge bg-green"> Hi, ${sessionScope.LOGGED_USER.username}</span></a>
                 </li>
 			</ul>
 		</nav>
@@ -77,3 +86,51 @@
 
 </div>
 <!-- /top navigation -->
+
+<script type="text/javascript">
+
+$("document").ready(function(){
+	/*function success(pos) {
+		  var crd = pos.coords;
+
+		  	$.post("../user/updateUserLocation.do",
+	   	    {
+		  		userId:"${sessionScope.LOGGED_USER.userId}",
+	   	        latt: crd.latitude,
+	   	        longt: crd.longitude,
+	   	        acc:crd.accuracy
+	   	    },
+	   	    function(data, status){
+	   	        console.log("location saved...");
+	   	    });
+		  
+		};
+
+		function error(err) {
+		  console.warn('ERROR(' + err.code + '): ' + err.message);
+		};
+
+		var options = {
+		  enableHighAccuracy: true,
+		  timeout: 5000,
+		  maximumAge: 0
+		};
+
+		navigator.geolocation.getCurrentPosition(success, error, options);*/
+
+	$.post("../notification/getNotifications.do",
+    {userId:"${sessionScope.LOGGED_USER.userId}"},
+    function(data, status){
+        console.log(data);
+        $("#notificationUl").html("");
+        var htmlString = "";
+        $.each(data, function(i, item) {
+        	htmlString = htmlString + "<li><a href='../product/showProduct.htm?productId="+item.product.productId+"'>"+item.description+"("+item.product.productTitle+")</a></li>";
+        });
+        $("#notificationUl").html(htmlString);
+        
+    });
+
+});
+
+</script>

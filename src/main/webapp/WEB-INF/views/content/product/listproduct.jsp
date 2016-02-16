@@ -16,24 +16,31 @@
 		</div>
 		<div class="x_content">
 		
-	        <div class="row">
-			  <div class="col-sm-1">Preview</div>
-			  <div class="col-sm-3">Title</div>
-			  <div class="col-sm-5">Description</div>
-			  <div class="col-sm-2">Created Date</div>
-			  <div class="col-sm-1">State</div>
-			</div>
-    		<c:forEach var="product" items="${productList}">
-				<div class="row">
-				  <div class="col-sm-1">${product.productTitle}</div>
-				  <div class="col-sm-3">${product.productTitle}</div>
-				  <div class="col-sm-5">${product.description}</div>
-				  <div class="col-sm-2">${product.createdDateTime}</div>
-				  <div class="col-sm-1">${product.productStatus}</div>
-				</div>
-			</c:forEach>
+			<table class="table table-striped table-bordered">
+			
+				<tr>
+					<th>Preview</th>
+					<th>Title</th>
+					<th>Description</th>
+					<th>Created Date</th>
+					<th>State</th>
+					<th></th>
+				</tr>
+				
+	    		<c:forEach var="product" items="${productList}">
+					<tr>
+					  <td><img src="../download/getProductImage.htm?fname=${product.multiMediaList[0].media}" style="height: 60px;"/></td>
+					  <td>${product.productTitle}</td>
+					  <td>${product.description}</td>
+					  <td>${product.createdDateTime}</td>
+					  <td>${product.productStatus}</td>
+					  <th><a href="../product/showProduct.htm?productId=${product.productId}"><img src="../images/show-menu-icon.png" style="height: 15px;" /></a></th>
+					</tr>
+				</c:forEach>
+			
+			</table>
 		
-		<br/><hr/>
+		<hr/>
     	<a href="listProductCategory.htm" class="btn btn-primary btn-lg">Add More Product</a>
 		
 		</div>

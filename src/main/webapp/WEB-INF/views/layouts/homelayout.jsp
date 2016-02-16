@@ -11,8 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
         <title><tiles:insertAttribute name="title" ignore="true" /></title>
-        
-        <link rel='shortcut icon' type='image/x-icon' href='<c:url value="/images/favicon.ico"/>' />
+        <link rel='shortcut icon' type='image/x-icon' href='<c:url value="../images/favicon.ico"/>' />
 
 		<!-- Bootstrap core CSS -->
 		<link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
@@ -33,6 +32,8 @@
 		<link rel="stylesheet" href="<c:url value="/css/switchery/switchery.min.css"/>" />
 		
 		<link rel="stylesheet" href="<c:url value="/css/jquery-ui.min.css"/>" />
+		
+		<link rel="stylesheet" href="<c:url value="/css/sss.css"/>" type="text/css" media="all">
 		
 		<script src="<c:url value="/js/jquery.min.js"/>"></script>
 
@@ -74,6 +75,8 @@
 				<script src="<c:url value="/js/jquery-ui.min.js"/>" type="text/javascript"></script>
 				
 				<script src="<c:url value="/js/toastr.js"/>" type="text/javascript"></script>
+				
+				<script src="<c:url value="/js/sss.min.js"/>"></script>
 				
 				<script type="text/javascript">
 					autosize($('.resizable_textarea'));

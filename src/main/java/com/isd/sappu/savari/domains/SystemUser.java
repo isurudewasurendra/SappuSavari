@@ -274,14 +274,15 @@ public class SystemUser implements Serializable{
 	
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userId", userId);
-		map.put("username", username);
-		map.put("address", address);
-		map.put("mobileNo", mobileNo);
-		map.put("latitude", latitude);
-		map.put("longtitude", longtitude);
-		map.put("accuracy", accuracy);
-		map.put("activeStatus", activeStatus);
+		map.put("userId", this.userId);
+		map.put("username", this.username);
+		map.put("firstName", this.firstName);
+		map.put("address", this.address);
+		map.put("mobileNo", this.mobileNo);
+		map.put("latitude", this.latitude);
+		map.put("longtitude", this.longtitude);
+		map.put("accuracy", this.accuracy);
+		map.put("activeStatus", this.activeStatus);
 		return map;
 	}
 	

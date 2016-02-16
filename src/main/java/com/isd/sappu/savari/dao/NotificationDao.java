@@ -12,9 +12,11 @@ public interface NotificationDao extends CrudRepository<Notification, Long>{
 
 	public Notification findByNotificationId(long notificationId);
 	
-	public Notification findByUserAndProduct(SystemUser user, Product product);
+	public List<Notification> findByUserAndProduct(SystemUser user, Product product);
 	
 	public List<Notification> findByUser(SystemUser user);
+	
+	public List<Notification> findByUserAndSeenStatus(SystemUser user, int seenStatus);
 	
 	public List<Notification> findByProduct(Product product);
 	

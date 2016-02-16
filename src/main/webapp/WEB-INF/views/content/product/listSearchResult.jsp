@@ -16,12 +16,29 @@
 		</div>
 		<div class="x_content">
 		
-	        <c:forEach var="product" items="${productList}">
-				<div>
-					product Id:${product.productId}
-					<a href="../product/showProduct.htm?productId=${product.productId}">view</a>
-				</div>
-			</c:forEach>
+			<table class="table table-striped table-bordered">
+			
+				<tr>
+					<th>Preview</th>
+					<th>Title</th>
+					<th>Description</th>
+					<th>Created Date</th>
+					<th>State</th>
+					<th></th>
+				</tr>
+				
+	    		<c:forEach var="product" items="${productList}">
+					<tr>
+					  <td><img src="../download/getProductImage.htm?fname=${product.multiMediaList[0].media}" style="height: 60px;"/></td>
+					  <td>${product.productTitle}</td>
+					  <td>${product.description}</td>
+					  <td>${product.createdDateTime}</td>
+					  <td>${product.productStatus}</td>
+					  <th><a href="../product/showProduct.htm?productId=${product.productId}"><img src="../images/show-menu-icon.png" style="height: 15px;" /></a></th>
+					</tr>
+				</c:forEach>
+			
+			</table>
 		
 		</div>
 	</div>

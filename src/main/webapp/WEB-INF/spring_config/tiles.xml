@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
-       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
     <definition name="home.layout" template="/WEB-INF/views/layouts/homelayout.jsp">
@@ -31,7 +31,7 @@
     <!-- home page -->
     <definition name="home" extends="home.layout">
         <put-attribute name="title" value="Home" /> 
-        <put-attribute name="body-position" value="/WEB-INF/views/content/body.jsp" />   
+        <put-attribute name="body-position" value="/WEB-INF/views/content/home.jsp" />   
     </definition>
     
     <!-- profile page -->
@@ -153,7 +153,7 @@
     <!-- notification dashoboard page-->
     <definition name="notificationdashboard" extends="home.layout">
         <put-attribute name="title" value="Notifications" />
-        <put-attribute name="body-position" value="/WEB-INF/views/content/message/notificationDashboard.jsp" />   
+        <put-attribute name="body-position" value="/WEB-INF/views/content/notification/notificationDashboard.jsp" />   
     </definition>
      
 </tiles-definitions>

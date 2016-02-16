@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import com.isd.sappu.savari.domains.Notification;
 import com.isd.sappu.savari.domains.Product;
@@ -13,6 +14,7 @@ import com.isd.sappu.savari.domains.SearchRequest;
 import com.isd.sappu.savari.domains.SystemUser;
 import com.isd.sappu.savari.util.EnumConstant;
 
+@Component
 public class ScheduleLocationSearchService {
 
 	@Autowired
@@ -27,7 +29,7 @@ public class ScheduleLocationSearchService {
 	@Autowired
 	NotificationService notificationService;
 
-	@Scheduled(fixedDelay = 1000 * 60)
+	@Scheduled(fixedDelay = 1000 * 100000)
 	public void demoServiceMethod() {
 		System.out.println("****************Schedular started running at " + new Date() + "**********************");
 
@@ -93,7 +95,10 @@ public class ScheduleLocationSearchService {
 				
 				
 				Notification notification = new Notification(0, EnumConstant.NotificationType.SEARCH.toString(), "we found out a new product", 4, null, new Date(), applicationUser, product);
-				notificationService.saveUpdateNotification(notification);
+				List<Notification> existNotifications = notificationService.getNotification(applicationUser.getUserId(), product.getProductId());
+				if(existNotifications == null || (existNotifications != null && existNotifications.size() == 0)){
+					notificationService.saveUpdateNotification(notification);
+				}
 			}
 
 		}

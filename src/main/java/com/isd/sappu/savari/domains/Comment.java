@@ -3,6 +3,7 @@ package com.isd.sappu.savari.domains;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class Comment implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long commentId;
 	
+	@Column(length=10000)
 	private String comment;
 	
 	private String showStatus;

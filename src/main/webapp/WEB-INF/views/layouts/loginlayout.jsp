@@ -11,8 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
         <title><tiles:insertAttribute name="title" ignore="true" /></title>
-        
-        <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
+        <link rel='shortcut icon' type='image/x-icon' href='<c:url value="../images/favicon.ico"/>' />
         
         <!-- Bootstrap core CSS -->
 		<link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
