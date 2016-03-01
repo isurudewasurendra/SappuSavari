@@ -36,7 +36,7 @@ public class Message implements Serializable{
 	@ManyToOne
 	private SystemUser receiver;
 	
-	
+	private long productId;
 	
 
 	public long getMessageId() {
@@ -103,4 +103,13 @@ public class Message implements Serializable{
 		this.subject = subject;
 	}
 
+	public long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(long productId) {
+		this.productId = productId;
+	}
+
+	
 }

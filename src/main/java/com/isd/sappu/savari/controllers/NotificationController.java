@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.isd.sappu.savari.domains.Notification;
 import com.isd.sappu.savari.domains.Product;
+import com.isd.sappu.savari.domains.SystemUser;
 import com.isd.sappu.savari.services.NotificationService;
 import com.isd.sappu.savari.util.AppConstant;
 import com.isd.sappu.savari.util.SessionUtil;
@@ -53,6 +54,9 @@ public class NotificationController {
 				product.setProductId(notification.getProduct().getProductId());
 				product.setProductTitle(notification.getProduct().getProductTitle());
 				notifi.setProduct(product);
+				SystemUser user = new SystemUser();
+				user.setFirstName(notification.getProduct().getUser().getFirstName());
+				notifi.setUser(user);
 				notificationList.add(notifi);
 			}
 			System.out.println("+++size++"+notificationList.size());

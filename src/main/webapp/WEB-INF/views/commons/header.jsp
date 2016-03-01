@@ -125,7 +125,7 @@ $("document").ready(function(){
         $("#notificationUl").html("");
         var htmlString = "";
         $.each(data, function(i, item) {
-        	htmlString = htmlString + "<li><a href='../product/showProduct.htm?productId="+item.product.productId+"'>"+item.description+"("+item.product.productTitle+")</a></li>";
+        	htmlString = htmlString + "<li><a href='../product/showProduct.htm?productId="+item.product.productId+"'>"+item.description+"("+item.user.firstName+"/"+item.product.productTitle+")</a></li>";
         });
         $("#notificationUl").html(htmlString);
         

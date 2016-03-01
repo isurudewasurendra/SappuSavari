@@ -23,6 +23,7 @@
 					<th>Date</th>
 					<th>Subject</th>
 					<th>Content</th>
+					<th></th>
 				</tr>
 				<c:forEach var="message" items="${inboxMessages}" varStatus="count">
 					<tr>
@@ -31,6 +32,7 @@
 						<td>${message.createdDateTime}</td>
 						<td>${message.subject}</td>
 						<td>${message.message}</td>
+						<td><a href="../message/createMessage.htm?owner=${message.sender.userId}&productId=${message.productId}">Reply</a></td>
 					</tr>
     			</c:forEach>
 			</table>

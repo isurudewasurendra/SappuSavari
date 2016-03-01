@@ -106,6 +106,7 @@ public class MessageController {
 		newMessage.setMessage(message);
 		newMessage.setCreatedDateTime(new Date());
 		newMessage.setUpdatedDateTime(new Date());
+		newMessage.setProductId(Long.parseLong(productId));
 		
 		messageService.saveUpdateMessage(newMessage);
 		

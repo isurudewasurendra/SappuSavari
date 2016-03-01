@@ -29,7 +29,7 @@ public class ScheduleLocationSearchService {
 	@Autowired
 	NotificationService notificationService;
 
-	@Scheduled(fixedDelay = 1000 * 100000)
+	@Scheduled(fixedDelay = 1000 * 20)
 	public void demoServiceMethod() {
 		System.out.println("****************Schedular started running at " + new Date() + "**********************");
 
