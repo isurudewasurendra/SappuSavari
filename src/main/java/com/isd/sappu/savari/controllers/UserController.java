@@ -158,8 +158,6 @@ public class UserController {
 	
 	@RequestMapping(value="followSeller", method=RequestMethod.GET)
 	public String getFollowUser(@RequestParam("userId") long userId, @RequestParam("proId") long productId, HttpServletRequest request){
-		ModelMap map = new ModelMap();
-		
 		SystemUser seller = systemUserService.getSystemUser(userId);
 		SystemUser buyer = systemUserService.getSystemUser(sessionUtil.getLoggedUserFromSession(AppConstant.LOGGED_USER, request).getUserId());
 		Product product = productService.getProductById(productId);
@@ -177,5 +175,18 @@ public class UserController {
 		followSellerService.saveUpdateFollowSeller(followSeller);
 		
 		return "redirect:/product/showProduct.htm?productId="+product.getProductId();
+	}
+	
+	
+	@RequestMapping(value="findSeller", method=RequestMethod.GET)
+	public ModelAndView getFindSeller(@RequestParam("sUserId") long sUserId, HttpServletRequest request){
+		ModelMap map = new ModelMap();
+		SystemUser seller = systemUserService.getSystemUser(sUserId);
+		SystemUser buyer = systemUserService.getSystemUser(sessionUtil.getLoggedUserFromSession(AppConstant.LOGGED_USER, request).getUserId());
+		
+		map.put("seller", seller);
+		map.put("buyer", buyer);
+		
+		return new ModelAndView("findSeller", map);
 	}
 }

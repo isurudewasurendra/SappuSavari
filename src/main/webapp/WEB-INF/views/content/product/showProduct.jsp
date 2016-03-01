@@ -150,7 +150,7 @@
 			
 			<a class="btn btn-primary btn-lg" href="../message/createMessage.htm?owner=${product.user.userId}&productId=${product.productId}">Contact Owner</a>
 			
-			<a class="btn btn-primary btn-lg" href="../user/followSeller.htm?userId=${product.user.userId}&proId=${product.user.userId}">Follow Seller</a>
+			<a class="btn btn-primary btn-lg" href="../user/followSeller.htm?userId=${product.user.userId}&proId=${product.productId}">Follow Seller</a>
 			
 			<hr/>
 			<h2>Rating</h2>

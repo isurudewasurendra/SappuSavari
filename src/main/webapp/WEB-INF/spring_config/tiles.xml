@@ -155,5 +155,10 @@
         <put-attribute name="title" value="Notifications" />
         <put-attribute name="body-position" value="/WEB-INF/views/content/notification/notificationDashboard.jsp" />   
     </definition>
+    
+    <definition name="findSeller" extends="home.layout">
+        <put-attribute name="title" value="Find Seller" />
+        <put-attribute name="body-position" value="/WEB-INF/views/content/user/findSeller.jsp" />   
+    </definition>
      
 </tiles-definitions>

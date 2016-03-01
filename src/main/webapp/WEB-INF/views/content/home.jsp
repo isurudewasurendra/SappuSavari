@@ -50,6 +50,9 @@ var firstName = "";
 				  position:myCenter_${count.index},
 				  animation:google.maps.Animation.DROP
 			  });
+			marker_${count.index}.addListener('click', function() {
+			    window.location="../user/findSeller.htm?sUserId=${followSeller.sellerId}";
+			  });
 			marker_${count.index}.setMap(map);
 			var infowindow_${count.index} = new google.maps.InfoWindow({
 			  	content:"${followSeller.sellerName}(${followSeller.productTitle})"  		
@@ -82,5 +85,6 @@ var firstName = "";
 			<div id="map-canvas"></div>
 		</div>
   </div>
+  <a href="../user/findSeller.htm?sUserId=2"><button>xx</button></a>
 </div>
 
