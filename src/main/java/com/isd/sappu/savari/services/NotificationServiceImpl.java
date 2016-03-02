@@ -53,12 +53,12 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public List<Notification> getNotification(long userId, long productId) {
+	public List<Notification> getNotification(long userId, long productId, String notificationType) {
 		SystemUser user = new SystemUser();
 		user.setUserId(userId);
 		Product product = new Product();
 		product.setProductId(productId);
-		return (List<Notification>) notificationDao.findByUserAndProduct(user, product);
+		return (List<Notification>) notificationDao.findByUserAndProductAndNotificationType(user, product, notificationType);
 	}
 
 }

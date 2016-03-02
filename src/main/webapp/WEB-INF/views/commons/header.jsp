@@ -125,11 +125,21 @@ $("document").ready(function(){
         $("#notificationUl").html("");
         var htmlString = "";
         $.each(data, function(i, item) {
-        	htmlString = htmlString + "<li><a href='../product/showProduct.htm?productId="+item.product.productId+"'>"+item.description+"("+item.user.firstName+"/"+item.product.productTitle+")</a></li>";
+            var redirectUrl = "../product/showProduct.htm?productId="+item.product.productId;
+            if(item.seenStatus == 0){
+            	htmlString = htmlString + "<li><a style='font-weight:bold;' onclick='notificationProcess("+item.notificationId+", "+redirectUrl+");' href='#'>"+item.description+"("+item.user.firstName+"/"+item.product.productTitle+")</a></li>";
+            }
         });
         $("#notificationUl").html(htmlString);
-        
     });
+
+	function notificationProcess(notificationId, redirectLocation){
+		$.post("../notification/updateNotificationSeenStatus.do",
+	    {notificationId:notificationId},
+	    function(data, status){
+		    window.location = redirectLocation;
+	    });
+	}
 
 });
 

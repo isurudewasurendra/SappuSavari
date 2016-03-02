@@ -66,6 +66,13 @@ public class NotificationController {
 		return notificationList;
 	}
 	
+	@RequestMapping(value="updateNotificationSeenStatus", method=RequestMethod.POST)
+	public @ResponseBody void updateNotificationSeenStatus(@RequestParam("notificationId") long notificationId, HttpServletRequest request){
+		Notification notification = notificationService.getNotification(notificationId);
+		notification.setSeenStatus(1);
+		notificationService.saveUpdateNotification(notification);
+	}
+	
 	@RequestMapping(value="removeNotification", method=RequestMethod.GET)
 	public String removeSearchHistory(@RequestParam("notId") long notificationId, HttpServletRequest request){
 		Notification notification = notificationService.getNotification(notificationId);

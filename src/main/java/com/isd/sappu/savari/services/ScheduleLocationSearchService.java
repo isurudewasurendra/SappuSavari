@@ -86,6 +86,11 @@ public class ScheduleLocationSearchService {
 				double distance = this.getDistanceFromLatLonInKm(fromLat, fromLon, toLat, toLon);
 				if (distance < 1) {
 					//this product details should post the users notification panel high priority
+					Notification notification = new Notification(0, EnumConstant.NotificationType.DISTANCE.toString(), "your seller is near by", 5, null, new Date(), applicationUser, product);
+					List<Notification> existNotifications = notificationService.getNotification(applicationUser.getUserId(), product.getProductId(), EnumConstant.NotificationType.DISTANCE.toString());
+					if(existNotifications == null || (existNotifications != null && existNotifications.size() == 0)){
+						notificationService.saveUpdateNotification(notification);
+					}
 				}
 			}
 			
@@ -95,7 +100,7 @@ public class ScheduleLocationSearchService {
 				
 				
 				Notification notification = new Notification(0, EnumConstant.NotificationType.SEARCH.toString(), "we found out a new product", 4, null, new Date(), applicationUser, product);
-				List<Notification> existNotifications = notificationService.getNotification(applicationUser.getUserId(), product.getProductId());
+				List<Notification> existNotifications = notificationService.getNotification(applicationUser.getUserId(), product.getProductId(), EnumConstant.NotificationType.SEARCH.toString());
 				if(existNotifications == null || (existNotifications != null && existNotifications.size() == 0)){
 					notificationService.saveUpdateNotification(notification);
 				}

@@ -10,7 +10,7 @@ public interface NotificationService {
 	
 	public Notification getNotification(long notificationId);
 	
-	public List<Notification> getNotification(long userId, long productId);
+	public List<Notification> getNotification(long userId, long productId, String notificationType);
 	
 	public List<Notification> getNotificationsByUserId(long userId);
 	

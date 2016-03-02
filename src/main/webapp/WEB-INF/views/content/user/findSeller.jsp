@@ -11,8 +11,18 @@ $("document").ready(function(){
 
 	var fromlat = ${buyer.latitude};
 	var fromlong = ${buyer.longtitude};
-	var val = 0;
 
+	window.setInterval(function(){
+		$.get("../user/getSystemUser.do",{
+	  		userId:${sessionScope.LOGGED_USER.userId}
+		    },function(data, status){
+		    	fromlat = data.latitude;
+		    	fromlong = data.longtitude;
+		    	console.log(fromlat);
+		    	console.log(fromlong);
+		    });
+	}, 1000);
+	
 	var Center = new google.maps.LatLng(${buyer.latitude}, ${buyer.longtitude});
 	var directionsDisplay;
 	var directionsService = new google.maps.DirectionsService();
@@ -44,8 +54,7 @@ $("document").ready(function(){
 	}
 
 	function changeMarkerPosition(marker) {
-		val = val + 0.00001;
-	    var latlng = new google.maps.LatLng(fromlat-val, fromlong-val);
+	    var latlng = new google.maps.LatLng(fromlat, fromlong);
 	    marker.setPosition(latlng);
 	}
 
