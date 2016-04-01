@@ -75,6 +75,8 @@ public class Product implements Serializable{
 	
 	private Date updatedDateTime;
 	
+	private boolean isDelete = false;
+	
 	@ManyToOne
 	private SystemUser user;
 	
@@ -356,6 +358,13 @@ public class Product implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
+	}
+
 }

@@ -152,6 +152,8 @@
 			
 			<a class="btn btn-primary btn-lg" href="../user/followSeller.htm?userId=${product.user.userId}&proId=${product.productId}">Follow Seller</a>
 			
+			<a class="btn btn-primary btn-lg" href="../user/findSeller.htm?sUserId=${product.user.userId}">Find Seller On Map</a>
+			
 			<hr/>
 			<h2>Rating</h2>
 			

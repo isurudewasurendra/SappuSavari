@@ -54,6 +54,8 @@ public class SystemUser implements Serializable{
 	
 	private int activeStatus;
 	
+	private boolean isDelete = false;
+	
 	@OneToMany(mappedBy="user")
 	@Cascade(CascadeType.ALL)
 	private List<Favorite> favoriteList;
@@ -272,6 +274,14 @@ public class SystemUser implements Serializable{
 		this.accuracy = accuracy;
 	}
 	
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
+	}
+
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", this.userId);

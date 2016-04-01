@@ -19,7 +19,11 @@
 		
 			<table class="table table-striped table-bordered" id="buildingLotsTable">
 				<c:forEach var="notification" items="${notificationList}" varStatus="count">
-					<tr>
+					<tr
+						<c:if test="${notification.seenStatus == 0}">
+							style="background-color: #1ABB9C;"
+						</c:if>
+					 >
 						<td>${count.index+1}</td>
 						<td>${notification.description}</td>
 						<td>${notification.product.productTitle}</td>

@@ -30,6 +30,8 @@ public class Message implements Serializable{
 	
 	private String readStatus;
 	
+	private boolean isDelete = false;
+	
 	@ManyToOne
 	private SystemUser sender;
 	
@@ -111,5 +113,12 @@ public class Message implements Serializable{
 		this.productId = productId;
 	}
 
-	
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
+	}
+
 }

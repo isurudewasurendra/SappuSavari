@@ -85,6 +85,6 @@ var firstName = "";
 			<div id="map-canvas"></div>
 		</div>
   </div>
-  <a href="../user/findSeller.htm?sUserId=2"><button>xx</button></a>
+<!--   <a href="../user/findSeller.htm?sUserId=2"><button>xx</button></a> -->
 </div>
 

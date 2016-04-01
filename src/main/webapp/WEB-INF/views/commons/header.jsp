@@ -68,6 +68,7 @@
 					</ul>
 				</li>
 				<li class="">
+					<div id="noti_bubble" class="noti_bubble">*</div>
 					<a href="javascript:;"
 					class="user-profile dropdown-toggle" data-toggle="dropdown"
 					aria-expanded="false"> <img src="<c:url value="/images/bell.png"/>" alt="">
@@ -78,7 +79,7 @@
 					</ul>
 				</li>
 				<li class="">
-                    <a href="../user/userprofile.htm?username=${sessionScope.LOGGED_USER.username}"><span class="badge bg-green"> Hi, ${sessionScope.LOGGED_USER.username}</span></a>
+					<a href="../user/userprofile.htm?username=${sessionScope.LOGGED_USER.username}"><span class="badge bg-green"> Hi, ${sessionScope.LOGGED_USER.username}</span></a>
                 </li>
 			</ul>
 		</nav>
@@ -118,28 +119,35 @@ $("document").ready(function(){
 
 		navigator.geolocation.getCurrentPosition(success, error, options);*/
 
+	function notificationProcess(notificationId, redirectLocation){
+		console.log(notificationId);
+		console.log(redirectLocation);
+// 		$.post("../notification/updateNotificationSeenStatus.do",
+// 	    {notificationId:notificationId},
+// 	    function(data, status){
+// 		    window.location = redirectLocation;
+// 	    });
+	}
+
 	$.post("../notification/getNotifications.do",
     {userId:"${sessionScope.LOGGED_USER.userId}"},
     function(data, status){
         console.log(data);
         $("#notificationUl").html("");
         var htmlString = "";
+        var count = 0;
         $.each(data, function(i, item) {
-            var redirectUrl = "../product/showProduct.htm?productId="+item.product.productId;
+            var redirectUrl = '../product/showProduct.htm?productId='+item.product.productId+'&notify='+item.notificationId;
             if(item.seenStatus == 0){
-            	htmlString = htmlString + "<li><a style='font-weight:bold;' onclick='notificationProcess("+item.notificationId+", "+redirectUrl+");' href='#'>"+item.description+"("+item.user.firstName+"/"+item.product.productTitle+")</a></li>";
+                count = count + 1;
+            	htmlString = htmlString + "<li><a style='font-weight:bold;' href='"+redirectUrl+"'>"+item.description+"("+item.user.firstName+"/"+item.product.productTitle+")</a></li>";
             }
         });
         $("#notificationUl").html(htmlString);
+        $("#noti_bubble").html(count);
     });
 
-	function notificationProcess(notificationId, redirectLocation){
-		$.post("../notification/updateNotificationSeenStatus.do",
-	    {notificationId:notificationId},
-	    function(data, status){
-		    window.location = redirectLocation;
-	    });
-	}
+	
 
 });
 

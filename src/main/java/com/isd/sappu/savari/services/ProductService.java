@@ -11,6 +11,8 @@ public interface ProductService {
 	
 	public Product getProductById(long productId);
 	
+	public List<Product> getSuggestedProductsById(long productId);
+	
 	public List<Product> getAllProducts();
 	
 	public List<Product> getAllProductByUserId(long userId);

@@ -24,8 +24,9 @@
 					<h1>
 						<i class="fa fa-area-chart" style="font-size: 26px;"></i> Sappu Savari
 					</h1>
-					Copyright © 2016 National Building Research Organisation.<a>
-						All Rights Reserved.</a>
+					Copyright © 2016.<a>
+				All Rights Reserved.</a>| <span class="lead"> <i
+				class="fa fa-area-chart"></i> Sappu Savari
 
 				</div>
 			</div>

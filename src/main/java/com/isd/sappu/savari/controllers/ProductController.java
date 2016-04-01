@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,11 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.isd.sappu.savari.domains.Comment;
 import com.isd.sappu.savari.domains.Favorite;
+import com.isd.sappu.savari.domains.Notification;
 import com.isd.sappu.savari.domains.Product;
 import com.isd.sappu.savari.domains.ProductMultimedia;
 import com.isd.sappu.savari.domains.Rating;
 import com.isd.sappu.savari.services.CommentService;
 import com.isd.sappu.savari.services.FavoriteService;
+import com.isd.sappu.savari.services.NotificationService;
 import com.isd.sappu.savari.services.ProductMultimediaService;
 import com.isd.sappu.savari.services.ProductService;
 import com.isd.sappu.savari.services.RatingService;
@@ -52,6 +55,9 @@ public class ProductController {
 	@Autowired
 	private ProductMultimediaService productMultimediaService;
 	
+	@Autowired
+	private NotificationService notificationService;
+	
 	@RequestMapping(value="showProduct", method=RequestMethod.GET)
 	public ModelAndView getShowProduct(@RequestParam("productId") long productId, HttpServletRequest request){
 		ModelMap map = new ModelMap();
@@ -73,6 +79,14 @@ public class ProductController {
 		
 		int overallRating = ratingService.calculateOverallRating(productId);
 		map.put("overallRating", overallRating);
+		
+		String notify = request.getParameter("notify");
+		if(!StringUtils.isEmpty(notify) && Long.parseLong(notify)>0){
+			long notificationId = Long.parseLong(notify);
+			Notification notification = notificationService.getNotification(notificationId);
+			notification.setSeenStatus(1);
+			notificationService.saveUpdateNotification(notification);
+		}
 		
 		return new ModelAndView("showProduct", map);
 	}	

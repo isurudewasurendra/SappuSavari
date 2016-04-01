@@ -16,6 +16,9 @@ import com.isd.sappu.savari.domains.SearchRequest;
 import com.isd.sappu.savari.domains.SystemUser;
 import com.isd.sappu.savari.util.EnumConstant;
 
+import weka.core.Instance;
+import weka.experiment.InstanceQuery;
+
 @Service
 public class ProductServicesImpl implements ProductService{
 
@@ -139,6 +142,22 @@ public class ProductServicesImpl implements ProductService{
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public List<Product> getSuggestedProductsById(long productId) {
+
+		try {
+			InstanceQuery query = new InstanceQuery();
+			query.setUsername("nobody");
+			query.setPassword("");
+			query.setQuery("select * from whatsoever");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 }
