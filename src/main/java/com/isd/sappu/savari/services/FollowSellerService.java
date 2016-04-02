@@ -8,5 +8,8 @@ public interface FollowSellerService {
 	
 	public List<FollowSeller> findFollowSellers(long userId);
 	
+	public FollowSeller findFollowSeller(long buyerId, long sellerId);
+	
 	public FollowSeller saveUpdateFollowSeller(FollowSeller followSeller);
+	
 }

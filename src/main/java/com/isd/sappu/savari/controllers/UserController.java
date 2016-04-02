@@ -127,6 +127,15 @@ public class UserController {
 		return new ModelAndView("listsearchresult", map);
 	}
 	
+	@RequestMapping(value="viewAllPosts", method=RequestMethod.GET)
+	public ModelAndView viewAllPosts(HttpServletRequest request){
+		ModelMap map = new ModelMap();
+		List<Product> productList = productService.getAllProducts();
+		map.put("productList", productList);
+		
+		return new ModelAndView("listsearchresult", map);
+	}
+	
 	@RequestMapping(value="updateUserLocation", method=RequestMethod.POST)
 	public @ResponseBody String updateLocation(@RequestParam("userId") long userId, @RequestParam("latt") double latitude, @RequestParam("longt") double longtitude, @RequestParam("acc") int accuracy, HttpServletRequest request){
 		SystemUser systemUser = systemUserService.getSystemUser(userId);
@@ -162,7 +171,14 @@ public class UserController {
 		SystemUser buyer = systemUserService.getSystemUser(sessionUtil.getLoggedUserFromSession(AppConstant.LOGGED_USER, request).getUserId());
 		Product product = productService.getProductById(productId);
 		
-		FollowSeller followSeller = new FollowSeller();
+		FollowSeller existFollowSeller = followSellerService.findFollowSeller(buyer.getUserId(), seller.getUserId());
+		FollowSeller followSeller = null;
+		if(existFollowSeller != null){
+			followSeller = existFollowSeller;
+		}else{
+			followSeller = new FollowSeller();
+		}
+		
 		followSeller.setCreatedDateTime(new Date());
 		followSeller.setBuyerId(buyer.getUserId());
 		followSeller.setProductId(product.getProductId());

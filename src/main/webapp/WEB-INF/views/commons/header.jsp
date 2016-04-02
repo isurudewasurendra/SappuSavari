@@ -25,6 +25,7 @@
 					<li><a href="../home/home.htm"><i class="fa fa-home"></i> Home</a></li>
 					<li><a href="#"><i class="fa fa-usd"></i> Products <span class="fa fa-chevron-down"></span></a>
 						<ul class="nav child_menu" style="display: none">
+							<li><a href="../user/viewAllPosts.htm">View All</a></li>
 							<li><a href="../buy/listProductCategory.htm">Buy</a></li>
 							<li><a href="../sell/listProductCategory.htm">Sell</a></li>
 							<li><a href="../sell/listProduct.htm">My Store</a></li>

@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.isd.sappu.savari.domains.FollowSeller;
 import com.isd.sappu.savari.domains.Notification;
 import com.isd.sappu.savari.domains.Product;
 import com.isd.sappu.savari.domains.SearchRequest;
 import com.isd.sappu.savari.domains.SystemUser;
 import com.isd.sappu.savari.util.EnumConstant;
+import com.isd.sappu.savari.util.SendEmailUsingGMailSMTP;
 
 @Component
 public class ScheduleLocationSearchService {
@@ -28,9 +30,12 @@ public class ScheduleLocationSearchService {
 	
 	@Autowired
 	NotificationService notificationService;
+	
+	@Autowired
+	FollowSellerService followSellerService;
 
 	@Scheduled(fixedDelay = 1000 * 20)
-	public void demoServiceMethod() {
+	public void SchedularServiceMethod() {
 		System.out.println("****************Schedular started running at " + new Date() + "**********************");
 
 		// get application users
@@ -83,13 +88,27 @@ public class ScheduleLocationSearchService {
 				double fromLon = applicationUser.getLongtitude();
 				double toLat = product.getUser().getLatitude();
 				double toLon = product.getUser().getLongtitude();
-				double distance = this.getDistanceFromLatLonInKm(fromLat, fromLon, toLat, toLon);
-				if (distance < 1) {
-					//this product details should post the users notification panel high priority
-					Notification notification = new Notification(0, EnumConstant.NotificationType.DISTANCE.toString(), "your seller is near by", 5, null, new Date(), applicationUser, product);
-					List<Notification> existNotifications = notificationService.getNotification(applicationUser.getUserId(), product.getProductId(), EnumConstant.NotificationType.DISTANCE.toString());
-					if(existNotifications == null || (existNotifications != null && existNotifications.size() == 0)){
-						notificationService.saveUpdateNotification(notification);
+				
+				//get follow user by application user
+				List<FollowSeller> followSellers = followSellerService.findFollowSellers(applicationUser.getUserId());
+				for (FollowSeller followSeller : followSellers) {
+					//if the seller id in follow user == product.getUser()
+					if(followSeller.getSellerId() == product.getUser().getUserId()){
+						//do the distance calculation
+						double distance = this.getDistanceFromLatLonInKm(fromLat, fromLon, toLat, toLon);
+						if (distance < 1) {
+							//this product details should post the users notification panel high priority
+							Notification notification = new Notification(0, EnumConstant.NotificationType.DISTANCE.toString(), "your seller is near by", 5, null, new Date(), applicationUser, product);
+							List<Notification> existNotifications = notificationService.getNotification(applicationUser.getUserId(), product.getProductId(), EnumConstant.NotificationType.DISTANCE.toString());
+							if(existNotifications == null || (existNotifications != null && existNotifications.size() == 0)){
+								notificationService.saveUpdateNotification(notification);
+								
+								SendEmailUsingGMailSMTP email = new SendEmailUsingGMailSMTP();
+								String subject = "ALERT!" + product.getUser().getFirstName() + "IS NEAR YOU." + product.getUser().getMobileNo();
+								String content = "Your interested product("+product.getProductTitle()+") owner is near by, Please contact him to make a appointment or send a message.";
+								email.sendMail(applicationUser.getUsername(), subject, content);
+							}
+						}
 					}
 				}
 			}

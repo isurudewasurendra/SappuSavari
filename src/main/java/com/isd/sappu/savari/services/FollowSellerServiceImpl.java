@@ -24,4 +24,9 @@ public class FollowSellerServiceImpl implements FollowSellerService{
 		return followSellerDao.save(followSeller);
 	}
 
+	@Override
+	public FollowSeller findFollowSeller(long buyerId, long sellerId) {
+		return followSellerDao.findByBuyerIdAndSellerId(buyerId, sellerId);
+	}
+
 }
