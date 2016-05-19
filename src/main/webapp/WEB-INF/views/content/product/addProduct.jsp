@@ -228,6 +228,13 @@
 					  </div>
 					  
 					  <div class="form-group">
+					    <label for="inputSize" class="col-sm-2 control-label">Count</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="proCount" name="proCount" placeholder="Enter no of products" value="0">
+					    </div>
+					  </div>
+					  
+					  <div class="form-group">
 					    <div class="col-sm-offset-2 col-sm-10">
 					      <button type="submit" class="btn btn-primary col-md-2 col-sm-2">Submit</button>
 					    </div>

@@ -22,6 +22,7 @@ import com.isd.sappu.savari.domains.Notification;
 import com.isd.sappu.savari.domains.Product;
 import com.isd.sappu.savari.domains.ProductMultimedia;
 import com.isd.sappu.savari.domains.Rating;
+import com.isd.sappu.savari.domains.SystemUser;
 import com.isd.sappu.savari.services.CommentService;
 import com.isd.sappu.savari.services.FavoriteService;
 import com.isd.sappu.savari.services.NotificationService;
@@ -64,6 +65,15 @@ public class ProductController {
 		
 		Product product = productService.getProductById(productId);
 		map.put("product", product);
+		
+		List<Product> relatedProducts = productService.getRelatedProducts(productId);
+		map.put("relatedProducts", relatedProducts);
+		
+		List<Product> associatedProducts = productService.getAssociatedProducts(productId);
+		map.put("associatedProducts", associatedProducts);
+		
+		List<SystemUser> bestSellers = productService.getBestProductSellers(productId);
+		map.put("bestSellers", bestSellers);
 		
 		List<Comment> commentList = commentService.getCommentListByProductId(productId);
 		map.put("commentList", commentList);

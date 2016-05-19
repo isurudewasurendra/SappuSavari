@@ -102,6 +102,47 @@
     border-top:1px dotted #bbb;
     padding:10px;
 }
+.predictBox{
+    border: 1px solid #bbb;
+    border-radius:5px;
+    padding: 10px 10px 10px 10px;
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+    height: 220px;
+    overflow: scroll;
+}
+.predictProduct{
+	border: 1px solid #bbb;
+    border-radius:5px;
+    padding: 10px 10px 10px 10px;
+    float: left;
+    width: 18%;
+    margin-right: 10px;
+}
+.predictTitle{
+	font-weight: bold;
+}
+.sliderBox{
+	float:left;
+	width: 780px;
+}
+.sidePromtBox{
+	border: 1px solid #bbb;
+    border-radius:5px;
+    padding: 10px 10px 10px 10px;
+    float: left;
+    width: 250px;
+    margin-left: 10px;
+    height: 600px;
+    overflow: scroll;
+}
+.sidePredictProduct{
+	border: 1px solid #bbb;
+    border-radius:5px;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+}
 
 </style>
 
@@ -125,10 +166,34 @@
 			<c:if test="${fn:length(productMultimediaList) == 0}">
 				No preview available...
 			</c:if>
+			
+			<div class="sliderBox">
 			<div class="slider">
 				<c:forEach var="multimedia" items="${productMultimediaList}">
 	    			<img src="../download/getProductImage.htm?fname=${multimedia.media}" height="600px"/>
 	    		</c:forEach>
+			</div>
+			</div>
+			
+			<div class="sidePromtBox" align="center">
+				<div class="sidePredictProduct">
+					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+					<br/><br/>
+					<p class="predictTitle">Nissan Leaf</p>
+					<span class="predictTitle">Rs 249909</span>
+				</div>
+				<div class="sidePredictProduct">
+					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+					<br/><br/>
+					<p class="predictTitle">Nissan Leaf</p>
+					<span class="predictTitle">Rs 249909</span>
+				</div>
+				<div class="sidePredictProduct">
+					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+					<br/><br/>
+					<p class="predictTitle">Nissan Leaf</p>
+					<span class="predictTitle">Rs 249909</span>
+				</div>
 			</div>
 			
 			<table class="table table-striped table-bordered">
@@ -199,6 +264,68 @@
 			    </div>
 			</div>
     		</div>
+		
+		<hr/>
+		<h2>Related Products</h2>
+		
+			<div class="predictBox" align="center">
+				<div class="predictProduct">
+					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+					<br/><br/>
+					<p class="predictTitle">Nissan Leaf</p>
+					<span class="predictTitle">Rs 249909</span>
+				</div>
+				<div class="predictProduct">
+					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+					<br/><br/>
+					<p class="predictTitle">Nissan Leaf</p>
+					<span class="predictTitle">Rs 249909</span>
+				</div>
+				<div class="predictProduct">
+					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+					<br/><br/>
+					<p class="predictTitle">Nissan Leaf</p>
+					<span class="predictTitle">Rs 249909</span>
+				</div>
+				<div class="predictProduct">
+					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+					<br/><br/>
+					<p class="predictTitle">Nissan Leaf</p>
+					<span class="predictTitle">Rs 249909</span>
+				</div>
+				<div class="predictProduct">
+					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+					<br/><br/>
+					<p class="predictTitle">Nissan Leaf</p>
+					<span class="predictTitle">Rs 249909</span>
+				</div>
+				<div class="predictProduct">
+					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+					<br/><br/>
+					<p class="predictTitle">Nissan Leaf</p>
+					<span class="predictTitle">Rs 249909</span>
+				</div>
+				<div class="predictProduct">
+					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+					<br/><br/>
+					<p class="predictTitle">Nissan Leaf</p>
+					<span class="predictTitle">Rs 249909</span>
+				</div>
+			</div>
+			
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><hr/>
+		<h2>Best Sellers</h2>
+			
+			<div class="predictBox" align="center">
+				<c:forEach var="seller" items="${bestSellers}">
+					<div class="predictProduct">
+					<img src="../images/user_mock.png" height="100px"/>
+					<br/>
+					<p class="predictTitle">${seller.username}</p>
+					<a href="../message/createMessage.htm?owner=${seller.userId}&productId=${product.productId}"><button>Contact</button></a>
+				</div>
+				</c:forEach>
+			</div>
 		
 		</div>
 	</div>

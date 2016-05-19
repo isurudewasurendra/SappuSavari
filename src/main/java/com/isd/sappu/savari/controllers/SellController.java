@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -132,10 +134,13 @@ public class SellController {
 				|| productSubCategory.getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.COMPUTERACCESSORIES.toString())){
 			Map<String, ComputerBrand> brands = EnumConstant.ComputerBrand.getMap();
 			map.put("brands", brands);
-		}else if(productSubCategory.getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.TV.toString())){
+		}else if(productSubCategory.getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.TV.toString())
+				|| productSubCategory.getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.FRIDGE.toString())
+				|| productSubCategory.getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.AUDIO.toString())){
 			Map<String, TVBrand> brands = EnumConstant.TVBrand.getMap();
 			map.put("brands", brands);
-		}else if(productSubCategory.getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.CAMERA.toString())){
+		}else if(productSubCategory.getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.CAMERA.toString())
+				|| productSubCategory.getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.CAMERAACCESSORIES.toString())){
 			Map<String, CameraBrand> brands = EnumConstant.CameraBrand.getMap();
 			map.put("brands", brands);
 		}else if(productSubCategory.getSubCategoryName().equals(EnumConstant.VehicleSubCategory.CAR.toString())){
@@ -207,26 +212,30 @@ public class SellController {
 		String noOfRooms = (request.getParameter("inputNoOfRoom") == null)?"0":request.getParameter("inputNoOfRoom");
 		String propertySize = request.getParameter("inputSize");
 		
+		String proCount = request.getParameter("proCount");
+		
 		Product product = new Product();
 		
-		try {
-			List<ProductMultimedia> productMultimediaList = new ArrayList<ProductMultimedia>();
-			for(int i=0; i<5; i++){
-				Map<String, Object> resultMap = fileUploadManager.uploadImages(productImages[i], EnumConstant.UploadImageType.PRODUCT.toString());
-				String productImage = (String) resultMap.get("fileName");
+		if(StringUtils.isEmpty(proCount)){
+			try {
+				List<ProductMultimedia> productMultimediaList = new ArrayList<ProductMultimedia>();
+				for(int i=0; i<5; i++){
+					Map<String, Object> resultMap = fileUploadManager.uploadImages(productImages[i], EnumConstant.UploadImageType.PRODUCT.toString());
+					String productImage = (String) resultMap.get("fileName");
+					
+					ProductMultimedia productMultimedia = new ProductMultimedia();
+					productMultimedia.setMultimediaType(EnumConstant.MultimediaType.IMAGE.toString());
+					productMultimedia.setMedia(productImage);
+					productMultimedia.setUpdatedDateTime(new Date());
+					productMultimedia.setProduct(product);
+					
+					productMultimediaList.add(productMultimedia);
+				}
 				
-				ProductMultimedia productMultimedia = new ProductMultimedia();
-				productMultimedia.setMultimediaType(EnumConstant.MultimediaType.IMAGE.toString());
-				productMultimedia.setMedia(productImage);
-				productMultimedia.setUpdatedDateTime(new Date());
-				productMultimedia.setProduct(product);
-				
-				productMultimediaList.add(productMultimedia);
+				product.setMultiMediaList(productMultimediaList);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			
-			product.setMultiMediaList(productMultimediaList);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		
 		product.setProductTitle(title);
@@ -260,7 +269,123 @@ public class SellController {
 		product.setProductSubCategory(productSubCategory);
 		product.setPopularArea(popularArea);
 		
-		productService.saveUpdateProduct(product);
+		if(StringUtils.isEmpty(proCount)){
+			productService.saveUpdateProduct(product);
+		}else{
+			
+			int count = Integer.parseInt(proCount);
+			
+			ArrayList<String> productImageArray = new ArrayList<String>();
+			
+			Map<String, Object> resultMap1;
+			String productImage1;
+			
+			Map<String, Object> resultMap2;
+			String productImage2;
+			
+			Map<String, Object> resultMap3;
+			String productImage3;
+			
+			Map<String, Object> resultMap4;
+			String productImage4;
+			
+			Map<String, Object> resultMap5;
+			String productImage5;
+			
+			try{
+				resultMap1 = fileUploadManager.uploadImages(productImages[0], EnumConstant.UploadImageType.PRODUCT.toString());
+				productImage1 = (String) resultMap1.get("fileName");
+				productImageArray.add(productImage1);
+				
+				resultMap2 = fileUploadManager.uploadImages(productImages[1], EnumConstant.UploadImageType.PRODUCT.toString());
+				productImage2 = (String) resultMap2.get("fileName");
+				productImageArray.add(productImage2);
+				
+				resultMap3 = fileUploadManager.uploadImages(productImages[2], EnumConstant.UploadImageType.PRODUCT.toString());
+				productImage3 = (String) resultMap3.get("fileName");
+				productImageArray.add(productImage3);
+				
+				resultMap4 = fileUploadManager.uploadImages(productImages[3], EnumConstant.UploadImageType.PRODUCT.toString());
+				productImage4 = (String) resultMap4.get("fileName");
+				productImageArray.add(productImage4);
+				
+				resultMap5 = fileUploadManager.uploadImages(productImages[4], EnumConstant.UploadImageType.PRODUCT.toString());
+				productImage5 = (String) resultMap5.get("fileName");
+				productImageArray.add(productImage5);
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			for(int i=0;i<=count;i++){
+				
+				Product bulkProduct = new Product();
+				
+				try {
+					List<ProductMultimedia> productMultiList = new ArrayList<ProductMultimedia>();
+					for(int k=0; k<5; k++){
+						ProductMultimedia productmedia = new ProductMultimedia();
+						productmedia.setMultimediaType(EnumConstant.MultimediaType.IMAGE.toString());
+						productmedia.setMedia(productImageArray.get(k));
+						productmedia.setUpdatedDateTime(new Date());
+						productmedia.setProduct(bulkProduct);
+						
+						productMultiList.add(productmedia);
+					}
+					
+					bulkProduct.setMultiMediaList(productMultiList);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				bulkProduct.setProductTitle(title);
+				bulkProduct.setDescription(description);
+				bulkProduct.setAddress(address);
+				bulkProduct.setMobile(mobile);
+				bulkProduct.setLandPhone(telephone);
+				bulkProduct.setFax(fax);
+				bulkProduct.setEmail(email);
+				
+				bulkProduct.setPrice(Double.parseDouble(price)+new Random().nextInt(1000 - 100 + 1) + 100);
+				
+				bulkProduct.setAuthenticity(authenticity);
+				
+				String[] productTypeArray = {"PERSONEL","BUSINESS"};
+				int productArrayIndex = new Random().nextInt(productTypeArray.length);
+				bulkProduct.setProductType(productTypeArray[productArrayIndex]);
+				
+				bulkProduct.setProductBrand(brand);
+				bulkProduct.setProductModel(model);
+				bulkProduct.setProductCondition(condition);
+				bulkProduct.setBodyType(bodyType);
+				
+				bulkProduct.setMillege(String.valueOf(Integer.parseInt(mileage)+new Random().nextInt(20000 - 5000 + 1) + 5000));
+				
+				bulkProduct.setModelYear(String.valueOf(Integer.parseInt(modelYear) - new Random().nextInt(5 - 0 + 1) + 0));
+				bulkProduct.setTransmission(transmission);
+				
+				String[] fuelTypeArray = {"DIESEL","PETROL","OTHER"};
+				int fuelTypeIndex = new Random().nextInt(fuelTypeArray.length);
+				bulkProduct.setFuelType(fuelTypeArray[fuelTypeIndex]);
+				
+				bulkProduct.setNoOfBathroom(Integer.parseInt(noOfBathrooms));
+				bulkProduct.setNoOfRoom(Integer.parseInt(noOfRooms));
+				bulkProduct.setProductSize(propertySize);
+				
+				bulkProduct.setProductStatus(EnumConstant.ProductStatus.PUBLISH.toString());
+				bulkProduct.setCreatedDateTime((product.getCreatedDateTime()==null)?new Date():product.getCreatedDateTime());
+				bulkProduct.setUpdatedDateTime(new Date());
+				bulkProduct.setUser(sessionUtil.getLoggedUserFromSession(AppConstant.LOGGED_USER, request));
+				bulkProduct.setProductSubCategory(productSubCategory);
+				bulkProduct.setPopularArea(popularArea);
+				
+				productService.saveUpdateProduct(bulkProduct);
+			}
+		}
+		
+		
+		
+		
 		
 		return "redirect:listProduct.htm?msg=suc";
 	}

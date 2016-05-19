@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.isd.sappu.savari.domains.Product;
+import com.isd.sappu.savari.domains.ProductSubCategory;
 import com.isd.sappu.savari.domains.SystemUser;
 
 public interface ProductDao extends CrudRepository<Product, Long>{
@@ -16,6 +17,8 @@ public interface ProductDao extends CrudRepository<Product, Long>{
 	public List<Product> findAll();
 	
 	public List<Product> findProductByUser(SystemUser user);
+	
+	public List<Product> findProductByProductSubCategory(ProductSubCategory productSubCategory);
 
 	@Query(value = "select * from products where "
 			+ "productSubCategory_productSubCategoryId=:productSubCategoryId and "

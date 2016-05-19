@@ -1,6 +1,8 @@
 package com.isd.sappu.savari.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -158,6 +160,49 @@ public class ProductServicesImpl implements ProductService{
 		}
 
 		return null;
+	}
+
+	@Override
+	public List<Product> getRelatedProducts(long productId) {
+		
+		//fetch products product sub category wise and price less or great propotion of 5
+		
+		//get the first 5 products
+		
+		return null;
+	}
+
+	@Override
+	public List<Product> getAssociatedProducts(long productId) {
+
+		/*
+		 * associate rule (laptop/mobile/mob.accesories/watches/tv/fridge/camera/cam.accesories/com.accesories/Audio)
+		 * ===============
+		 * laptop<-->com.accesories
+		 * mobile<-->mob.accesories
+		 * tv<-->Audio<-->fridge
+		 * camera<-->camera.accessories
+		*/
+		
+		
+		return null;
+	}
+
+	@Override
+	public List<SystemUser> getBestProductSellers(long productId) {
+		//get all the product list on same sub category
+		//order by rating
+		//select first 10 sellers
+		
+		Product product = this.getProductById(productId);
+		List<Product> productList = productDao.findProductByProductSubCategory(product.getProductSubCategory());
+		
+		List<SystemUser> sellers = new ArrayList<SystemUser>();
+		for (Product pro : productList) {
+			sellers.add(pro.getUser());
+		}
+		
+		return sellers;
 	}
 
 }

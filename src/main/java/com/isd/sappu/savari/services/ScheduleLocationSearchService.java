@@ -34,7 +34,7 @@ public class ScheduleLocationSearchService {
 	@Autowired
 	FollowSellerService followSellerService;
 
-	@Scheduled(fixedDelay = 1000 * 20)
+	@Scheduled(fixedDelay = 10000000 * 20)
 	public void SchedularServiceMethod() {
 		System.out.println("****************Schedular started running at " + new Date() + "**********************");
 

@@ -740,7 +740,7 @@ public class EnumConstant {
 	public enum ElectronicSubCategory {
 		
 		MOBILEPHONE("Mobile Phone"), MOBILEPHONEACCESSORIES("Mobile Phone Accessories"), COMPUTER("Computer"), COMPUTERACCESSORIES("Computer Accessories"),
-		TV("TV"), CAMERA("Camera"), AUDIO("Audio"), OTHER("Other");
+		TV("TV"), CAMERA("Camera"), CAMERAACCESSORIES("Camera Accessories"), AUDIO("Audio"), FRIDGE("Fridge"), OTHER("Other");
 
 		private String displayName;
 

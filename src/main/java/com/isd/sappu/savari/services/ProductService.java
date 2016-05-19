@@ -2,6 +2,7 @@ package com.isd.sappu.savari.services;
 
 import java.util.List;
 
+import com.isd.sappu.savari.domains.SystemUser;
 import com.isd.sappu.savari.domains.Product;
 import com.isd.sappu.savari.domains.SearchRequest;
 
@@ -22,5 +23,11 @@ public interface ProductService {
 	public List<Product> getFavoriteProductsByUser(long userId);
 
 	public List<Product> getCommentedProductsByUser(long userId);
+
+	public List<Product> getRelatedProducts(long productId);
+
+	public List<Product> getAssociatedProducts(long productId);
+
+	public List<SystemUser> getBestProductSellers(long productId);
 
 }
