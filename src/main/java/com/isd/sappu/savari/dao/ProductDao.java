@@ -19,6 +19,25 @@ public interface ProductDao extends CrudRepository<Product, Long>{
 	public List<Product> findProductByUser(SystemUser user);
 	
 	public List<Product> findProductByProductSubCategory(ProductSubCategory productSubCategory);
+	
+	@Query(value = "select * from products where "
+			+ "productSubCategory_productSubCategoryId=:productSubCategoryId and "
+			+ "price between :minPrice and :maxPrice and "
+			+ "authenticity=:authenticity or 1=:authenticityBoolVal and "
+			+ "productType=:productType or 1=:productTypeBoolVal and "
+			+ "productCondition=:productCondition or 1=:productConditionBoolVal "
+			+ "order by price ASC"
+			, nativeQuery=true)
+	public List<Product> getRelatedProductList(
+			@Param("productSubCategoryId") long productCategoryId,
+			@Param("minPrice") double minPrice,
+			@Param("maxPrice") double maxPrice,
+			@Param("authenticity") String authenticity,
+			@Param("authenticityBoolVal") int authenticityBoolVal,
+			@Param("productType") String productType,
+			@Param("productTypeBoolVal") int productTypeBoolVal,
+			@Param("productCondition") String productCondition,
+			@Param("productConditionBoolVal") int productConditionBoolVal);
 
 	@Query(value = "select * from products where "
 			+ "productSubCategory_productSubCategoryId=:productSubCategoryId and "

@@ -269,55 +269,23 @@
 		<h2>Related Products</h2>
 		
 			<div class="predictBox" align="center">
-				<div class="predictProduct">
-					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
-					<br/><br/>
-					<p class="predictTitle">Nissan Leaf</p>
-					<span class="predictTitle">Rs 249909</span>
-				</div>
-				<div class="predictProduct">
-					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
-					<br/><br/>
-					<p class="predictTitle">Nissan Leaf</p>
-					<span class="predictTitle">Rs 249909</span>
-				</div>
-				<div class="predictProduct">
-					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
-					<br/><br/>
-					<p class="predictTitle">Nissan Leaf</p>
-					<span class="predictTitle">Rs 249909</span>
-				</div>
-				<div class="predictProduct">
-					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
-					<br/><br/>
-					<p class="predictTitle">Nissan Leaf</p>
-					<span class="predictTitle">Rs 249909</span>
-				</div>
-				<div class="predictProduct">
-					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
-					<br/><br/>
-					<p class="predictTitle">Nissan Leaf</p>
-					<span class="predictTitle">Rs 249909</span>
-				</div>
-				<div class="predictProduct">
-					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
-					<br/><br/>
-					<p class="predictTitle">Nissan Leaf</p>
-					<span class="predictTitle">Rs 249909</span>
-				</div>
-				<div class="predictProduct">
-					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
-					<br/><br/>
-					<p class="predictTitle">Nissan Leaf</p>
-					<span class="predictTitle">Rs 249909</span>
-				</div>
+				<c:forEach var="product" items="${relatedProducts}" end="9">
+					<div class="predictProduct">
+						<a href="../product/showProduct.htm?productId=${product.productId}">
+							<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+						</a>
+						<br/><br/>
+						<p class="predictTitle">Nissan Leaf</p>
+						<span class="predictTitle">Rs 249909</span>
+					</div>
+				</c:forEach>
 			</div>
 			
-		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><hr/>
-		<h2>Best Sellers</h2>
+			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><hr/>
+			<h2>Best Sellers</h2>
 			
 			<div class="predictBox" align="center">
-				<c:forEach var="seller" items="${bestSellers}">
+				<c:forEach var="seller" items="${bestSellers}" end="9">
 					<div class="predictProduct">
 					<img src="../images/user_mock.png" height="100px"/>
 					<br/>

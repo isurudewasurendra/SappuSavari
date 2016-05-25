@@ -169,7 +169,26 @@ public class ProductServicesImpl implements ProductService{
 		
 		//get the first 5 products
 		
-		return null;
+		try {
+			Product product = this.getProductById(productId);
+			long productCategoryId = product.getProductSubCategory().getProductSubCategoryId();
+			double minPrice = (product.getPrice()*95)/100;
+			double maxPrice = (product.getPrice()*105)/100;
+			String authenticity = product.getAuthenticity();
+			int authenticityBoolVal = (product.getAuthenticity()==null)?1:0;
+			String productType = product.getProductType();
+			int productTypeBoolVal = (product.getProductType()==null)?1:0;
+			String productCondition = product.getProductCondition();
+			int productConditionBoolVal = (product.getProductCondition()==null)?1:0;
+			
+			List<Product> productList = productDao.getRelatedProductList(productCategoryId, minPrice, maxPrice, authenticity, authenticityBoolVal, productType, productTypeBoolVal, productCondition, productConditionBoolVal);
+			
+			return productList;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -184,6 +203,30 @@ public class ProductServicesImpl implements ProductService{
 		 * camera<-->camera.accessories
 		*/
 		
+		Product product = this.getProductById(productId);
+		List<Product> productList = new ArrayList<Product>();
+		
+		if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.COMPUTER)){
+			
+		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.COMPUTERACCESSORIES)){
+			
+		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.MOBILEPHONE)){
+			
+		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.MOBILEPHONEACCESSORIES)){
+			
+		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.CAMERA)){
+			
+		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.CAMERAACCESSORIES)){
+			
+		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.TV)){
+			
+		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.FRIDGE)){
+			
+		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.AUDIO)){
+			
+		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.OTHER)){
+			
+		}
 		
 		return null;
 	}
