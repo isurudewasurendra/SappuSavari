@@ -6,5 +6,6 @@
     <li><a href="../buy/listProductCategory.htm">Buy</a></li>
     <li><a href="../message/messageDashBoard.htm">Messages</a></li>
     <li><a href="#">About</a></li>
+    <li><a href="#">Admin Panel</a></li>
   </ul>
 </div>

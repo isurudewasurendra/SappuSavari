@@ -38,6 +38,9 @@
 							<li><a href="../message/messageSent.htm">Sent</a></li>
 						</ul>
 					</li>
+					<security:authorize access="hasRole('ROLE_ADMIN')">
+						<li><a href="../home/adminpanel.htm"><i class="fa fa-area-chart"></i>Admin Panel</a></li>
+					</security:authorize>
 				</ul>
 			</div>
 		</div>

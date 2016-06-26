@@ -3,6 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="random" class="java.util.Random" scope="application"/>
 
 <style>
 
@@ -176,24 +177,16 @@
 			</div>
 			
 			<div class="sidePromtBox" align="center">
-				<div class="sidePredictProduct">
-					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+				<c:forEach var="product" items="${associatedProducts}" end="23">
+					<div class="sidePredictProduct">
+					<a href="../product/showProduct.htm?productId=${product.productId}">
+						<img src="../download/getProductImage.htm?fname=${product.multiMediaList[random.nextInt(5)].media}" height="100px"/>
+					</a>
 					<br/><br/>
-					<p class="predictTitle">Nissan Leaf</p>
-					<span class="predictTitle">Rs 249909</span>
+					<p class="predictTitle">${product.productTitle}</p>
+					<span class="predictTitle">Rs <fmt:formatNumber value="${product.price}" type="number" maxFractionDigits="3"/></span>
 				</div>
-				<div class="sidePredictProduct">
-					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
-					<br/><br/>
-					<p class="predictTitle">Nissan Leaf</p>
-					<span class="predictTitle">Rs 249909</span>
-				</div>
-				<div class="sidePredictProduct">
-					<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
-					<br/><br/>
-					<p class="predictTitle">Nissan Leaf</p>
-					<span class="predictTitle">Rs 249909</span>
-				</div>
+				</c:forEach>
 			</div>
 			
 			<table class="table table-striped table-bordered">
@@ -209,7 +202,7 @@
 				<tr>
 					<th>${product.email}</th>
 					<th>${product.mobile}</th>
-					<th><fmt:formatNumber value="${product.price}" type="number" maxFractionDigits="3"/></th>
+					<th>Rs <fmt:formatNumber value="${product.price}" type="number" maxFractionDigits="3"/></th>
 				</tr>
 			</table>
 			
@@ -269,14 +262,14 @@
 		<h2>Related Products</h2>
 		
 			<div class="predictBox" align="center">
-				<c:forEach var="product" items="${relatedProducts}" end="9">
+				<c:forEach var="product" items="${relatedProducts}" end="9" varStatus="productLoop">
 					<div class="predictProduct">
 						<a href="../product/showProduct.htm?productId=${product.productId}">
-							<img src="../download/getProductImage.htm?fname=product_1463058034795.jpg" height="100px"/>
+							<img src="../download/getProductImage.htm?fname=${product.multiMediaList[random.nextInt(5)].media}" height="100px" width="160px"/>
 						</a>
 						<br/><br/>
-						<p class="predictTitle">Nissan Leaf</p>
-						<span class="predictTitle">Rs 249909</span>
+						<p class="predictTitle">${product.productTitle}</p>
+						<span class="predictTitle">Rs <fmt:formatNumber value="${product.price}" type="number" maxFractionDigits="3"/></span>
 					</div>
 				</c:forEach>
 			</div>

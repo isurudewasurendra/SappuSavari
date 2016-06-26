@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<jsp:useBean id="random" class="java.util.Random" scope="application"/>
 
 <div class="row">
 	<div class="x_panel">
@@ -27,9 +28,9 @@
 					<th></th>
 				</tr>
 				
-	    		<c:forEach var="product" items="${productList}">
+	    		<c:forEach var="product" items="${productList}" varStatus="productLoop">
 					<tr>
-					  <td><img src="../download/getProductImage.htm?fname=${product.multiMediaList[0].media}" style="height: 60px;"/></td>
+					  <td><img src="../download/getProductImage.htm?fname=${product.multiMediaList[random.nextInt(5)].media}" style="height: 60px;"/></td>
 					  <td>${product.productTitle}</td>
 					  <td>${product.description}</td>
 					  <td>${product.createdDateTime}</td>

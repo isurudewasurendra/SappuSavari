@@ -96,7 +96,7 @@
 					  <div class="form-group">
 					    <label for="inputPrice" class="col-sm-2 control-label">Price</label>
 					    <div class="col-sm-10">
-					      <input type="number" class="form-control" id="inputPrice" name="inputPrice" placeholder="Enter Price" value="">
+					      <input type="number" class="form-control" id="inputPrice" name="inputPrice" placeholder="Enter Price" value="0">
 					    </div>
 					  </div>
 					  <div class="form-group">
@@ -168,13 +168,13 @@
 							  <div class="form-group">
 							    <label for="inputMileage" class="col-sm-2 control-label">Mileage</label>
 							    <div class="col-sm-10">
-							      <input type="number" class="form-control" id="inputMileage" name="inputMileage" placeholder="Enter Mileage" value="">
+							      <input type="number" class="form-control" id="inputMileage" name="inputMileage" placeholder="Enter Mileage" value="0">
 							    </div>
 							  </div>
 							  <div class="form-group">
 							    <label for="inputModelYear" class="col-sm-2 control-label">Model Year</label>
 							    <div class="col-sm-10">
-							      <input type="number" class="form-control" id="inputModelYear" name="inputModelYear" placeholder="Enter Model Year" value="">
+							      <input type="number" class="form-control" id="inputModelYear" name="inputModelYear" placeholder="Enter Model Year" value="0">
 							    </div>
 							  </div>
 							  <div class="form-group">

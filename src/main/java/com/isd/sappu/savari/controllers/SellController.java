@@ -203,8 +203,8 @@ public class SellController {
 		String condition = request.getParameter("inputCondition");
 		
 		String bodyType = request.getParameter("inputBodyType");
-		String mileage = request.getParameter("inputMileage");
-		String modelYear = request.getParameter("inputModelYear");
+		String mileage = (request.getParameter("inputMileage") == null)?"0":request.getParameter("inputMileage");
+		String modelYear = (request.getParameter("inputModelYear") == null)?"0":request.getParameter("inputModelYear");
 		String transmission = request.getParameter("inputTransmission");
 		String fuelType = request.getParameter("inputFuel");
 		

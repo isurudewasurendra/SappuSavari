@@ -1,9 +1,12 @@
 package com.isd.sappu.savari.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +35,9 @@ public class ProductServicesImpl implements ProductService{
 	
 	@Autowired
 	CommentService commentService;
+	
+	@Autowired
+	ProductCategoryService productCategoryService;
 	
 	@Override
 	public List<Product> getAllProducts() {
@@ -203,32 +209,65 @@ public class ProductServicesImpl implements ProductService{
 		 * camera<-->camera.accessories
 		*/
 		
+		/*
+ 			1	MOBILEPHONE
+			2	MOBILEPHONEACCESSORIES
+			3	COMPUTER
+			4	COMPUTERACCESSORIES
+			5	TV
+			6	CAMERA
+			7	AUDIO
+			8	OTHER
+			20	CAMERAACCESSORIES
+			21	FRIDGE
+		 */
+		
 		Product product = this.getProductById(productId);
+		long productCategoryId = 0;
+		String authenticity = product.getAuthenticity();
+		int authenticityBoolVal = (product.getAuthenticity()==null)?1:0;
+		String productType = product.getProductType();
+		int productTypeBoolVal = (product.getProductType()==null)?1:0;
+		String productCondition = product.getProductCondition();
+		int productConditionBoolVal = (product.getProductCondition()==null)?1:0;
+		
+		
 		List<Product> productList = new ArrayList<Product>();
 		
-		if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.COMPUTER)){
-			
-		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.COMPUTERACCESSORIES)){
-			
-		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.MOBILEPHONE)){
-			
-		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.MOBILEPHONEACCESSORIES)){
-			
-		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.CAMERA)){
-			
-		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.CAMERAACCESSORIES)){
-			
-		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.TV)){
-			
-		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.FRIDGE)){
-			
-		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.AUDIO)){
-			
-		}else if(product.getProductSubCategory().getSubCategoryName().equals(EnumConstant.ElectronicSubCategory.OTHER)){
-			
+		if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.COMPUTER.toString())){
+			//com accessories
+			productCategoryId = productCategoryService.getProductCategory(4).getProductCategoryId();
+		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.COMPUTERACCESSORIES.toString())){
+			//computers
+			productCategoryId = productCategoryService.getProductCategory(3).getProductCategoryId();
+		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.MOBILEPHONE.toString())){
+			//mobile phone accessories
+			productCategoryId = productCategoryService.getProductCategory(2).getProductCategoryId();
+		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.MOBILEPHONEACCESSORIES.toString())){
+			//mobile phone
+			productCategoryId = productCategoryService.getProductCategory(1).getProductCategoryId();
+		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.CAMERA.toString())){
+			//camera accesories
+			productCategoryId = productCategoryService.getProductCategory(20).getProductCategoryId();
+		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.CAMERAACCESSORIES.toString())){
+			//camera
+			productCategoryId = productCategoryService.getProductCategory(6).getProductCategoryId();
+		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.TV.toString())){
+			//audio and fridge
+			productCategoryId = productCategoryService.getProductCategory(7).getProductCategoryId();
+		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.FRIDGE.toString())){
+			//tc and audio
+			productCategoryId = productCategoryService.getProductCategory(5).getProductCategoryId();
+		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.AUDIO.toString())){
+			//tc and fridge
+			productCategoryId = productCategoryService.getProductCategory(5).getProductCategoryId();
+		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.OTHER.toString())){
+			//other
+			productCategoryId = productCategoryService.getProductCategory(8).getProductCategoryId();
 		}
 		
-		return null;
+		productList = productDao.getAssociatedProductList(productCategoryId, authenticity, authenticityBoolVal, productType, productTypeBoolVal, productCondition, productConditionBoolVal);
+		return productList;
 	}
 
 	@Override
@@ -245,7 +284,13 @@ public class ProductServicesImpl implements ProductService{
 			sellers.add(pro.getUser());
 		}
 		
-		return sellers;
+		Set<SystemUser> mySet = new HashSet<SystemUser>();
+		mySet.addAll(sellers);
+		
+		List<SystemUser> filteredSellers = new ArrayList<SystemUser>();
+		filteredSellers.addAll(mySet);
+		
+		return filteredSellers;
 	}
 
 }

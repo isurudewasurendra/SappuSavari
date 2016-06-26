@@ -1,6 +1,8 @@
 package com.isd.sappu.savari.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,6 +41,30 @@ public class HomeController {
 		
 		map.put("message", "isuru");
 		return new ModelAndView("home", map);
+	}
+	
+	@RequestMapping(value="adminpanel", method=RequestMethod.GET)
+	public ModelAndView adminPanel(HttpServletRequest request){
+		
+		return new ModelAndView("adminpanel");
+	}
+	
+	@RequestMapping(value="viewChart", method=RequestMethod.GET)
+	public ModelAndView runViewStatChart(HttpServletRequest request){
+		long subProductCategoryId = Long.parseLong(request.getParameter("productCategoryId"));
+		String chartType = request.getParameter("chartType");
+		
+		ModelMap map = new ModelMap();
+		String title = productCategoryService.getChartTitle(chartType, subProductCategoryId);
+		map.put("title", title);
+		
+		Map<Integer, String> legenddatamap = productCategoryService.getLegendDetails(subProductCategoryId);
+		map.put("legenddatamap", legenddatamap);
+		
+		Map<Integer, Integer> datamap = productCategoryService.getProductViewStat(chartType,subProductCategoryId);
+		map.put("datamap", datamap);
+		
+		return new ModelAndView("charts", map);
 	}
 	
 }

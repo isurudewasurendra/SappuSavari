@@ -16,6 +16,11 @@
         <put-attribute name="body-position" value="" />      
     </definition>
     
+    <definition name="chart.layout" template="/WEB-INF/views/layouts/chartlayout.jsp">
+        <put-attribute name="title-position" value="Template" />
+        <put-attribute name="body-position" value="" />      
+    </definition>
+    
     <!-- login page -->
     <definition name="login" extends="login.layout">
         <put-attribute name="title" value="Login" /> 
@@ -32,6 +37,18 @@
     <definition name="home" extends="home.layout">
         <put-attribute name="title" value="Home" /> 
         <put-attribute name="body-position" value="/WEB-INF/views/content/home.jsp" />   
+    </definition>
+    
+    <!-- admin panel page -->
+    <definition name="adminpanel" extends="home.layout">
+        <put-attribute name="title" value="Admin Panel" /> 
+        <put-attribute name="body-position" value="/WEB-INF/views/content/adminpanel.jsp" />   
+    </definition>
+    
+    <!-- chart page -->
+    <definition name="charts" extends="chart.layout">
+        <put-attribute name="title" value="Charts" /> 
+        <put-attribute name="body-position" value="/WEB-INF/views/content/charts/charts.jsp" />   
     </definition>
     
     <!-- profile page -->

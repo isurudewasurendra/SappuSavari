@@ -38,6 +38,22 @@ public interface ProductDao extends CrudRepository<Product, Long>{
 			@Param("productTypeBoolVal") int productTypeBoolVal,
 			@Param("productCondition") String productCondition,
 			@Param("productConditionBoolVal") int productConditionBoolVal);
+	
+	@Query(value = "select * from products where "
+			+ "productSubCategory_productSubCategoryId=:productSubCategoryId and "
+			+ "authenticity=:authenticity or 1=:authenticityBoolVal and "
+			+ "productType=:productType or 1=:productTypeBoolVal and "
+			+ "productCondition=:productCondition or 1=:productConditionBoolVal "
+			+ "order by price ASC"
+			, nativeQuery=true)
+	public List<Product> getAssociatedProductList(
+			@Param("productSubCategoryId") long productCategoryId,
+			@Param("authenticity") String authenticity,
+			@Param("authenticityBoolVal") int authenticityBoolVal,
+			@Param("productType") String productType,
+			@Param("productTypeBoolVal") int productTypeBoolVal,
+			@Param("productCondition") String productCondition,
+			@Param("productConditionBoolVal") int productConditionBoolVal);
 
 	@Query(value = "select * from products where "
 			+ "productSubCategory_productSubCategoryId=:productSubCategoryId and "
@@ -110,5 +126,5 @@ public interface ProductDao extends CrudRepository<Product, Long>{
 			@Param("minNoOfRoom") int minNoOfRoom,
 			@Param("maxNoOfRoom") int maxNoOfRoom
 			);
-	
+
 }
