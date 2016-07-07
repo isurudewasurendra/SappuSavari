@@ -16,7 +16,28 @@ $(function () {
         animationEnabled: true,
         axisX:{
 			labelFormatter: function(e){
-				return  "Product type " + (e.value+1);
+				if(e.value+1 == 1){
+					return  "Mobile(${mobileConfident}%)";
+				}else if(e.value+1 == 2){
+					return  "Mobile Accessories(${mobileAccessoriesConfident}%)";
+				}else if(e.value+1 == 3){
+					return  "Computer(${computerConfident}%)";
+				}else if(e.value+1 == 4){
+					return  "Computer Accessories(${computerAccessoriesConfident}%)";
+				}else if(e.value+1 == 5){
+					return  "Camera(${cameraConfident}%)";
+				}else if(e.value+1 == 6){
+					return  "Camera Accessories(${cameraAccessoriesConfident}%)";
+				}else if(e.value+1 == 7){
+					return  "TV(${tvConfident}%)";
+				}else if(e.value+1 == 8){
+					return  "Audio(${audioConfident}%)";
+				}else if(e.value+1 == 9){
+					return  "Refrigerator(${refrigeratorConfident}%)";
+				}
+				else{
+					return "Product Type" + (e.value+1);
+				}
 			},
 			interval: 1
 		},
@@ -26,6 +47,14 @@ $(function () {
 			dataPoints: [
 				<c:forEach var="data" items="${datamap}">
 				{ y: ${data.value} },
+				</c:forEach>
+			]
+		},
+		{
+			type: "line", //change it to line, area, column, pie, etc
+			dataPoints: [
+				<c:forEach var="data" items="${datamap}">
+				{ y: ${confident} },
 				</c:forEach>
 			]
 		}
@@ -39,12 +68,6 @@ $(function () {
 </head>
 <body>
 <div id="chartContainer" style="height: 500px; width: 100%;"></div>
-<hr/>
-Legend<br/>
-<c:forEach var="data" items="${legenddatamap}">
-	Product type ${data.key} : ${data.value} <br/>
-</c:forEach>
-<hr/>
 </body>
 
 </html>

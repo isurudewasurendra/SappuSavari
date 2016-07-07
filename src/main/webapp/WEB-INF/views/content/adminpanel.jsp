@@ -39,6 +39,10 @@
   		<option value="COMMENT">Comment Statistics</option>
   		<option value="CONTACT">Seller Contact Statistics</option>
   	</select>
+  	
+  	<br/><br/>
+  	Confident Level : 
+  	<input type="text" name="confident" value="50" id="confident" style="width: 20px;"/>%
   
   	<hr/>
   	

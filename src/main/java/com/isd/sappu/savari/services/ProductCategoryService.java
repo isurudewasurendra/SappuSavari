@@ -18,5 +18,7 @@ public interface ProductCategoryService {
 	public Map<Integer, String> getLegendDetails(long subProductCategoryId);
 	
 	public Map<Integer, Integer> getProductViewStat(String chartType, long subProductCategoryId);
+	
+	public double getConfidentLevel(long subProductCategoryId, long parentSubProductCategoryId);
 
 }
