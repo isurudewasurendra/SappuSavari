@@ -39,6 +39,9 @@ public class ProductServicesImpl implements ProductService{
 	@Autowired
 	ProductCategoryService productCategoryService;
 	
+	@Autowired
+	ProductSubCategoryService productSubCategoryService;
+	
 	@Override
 	public List<Product> getAllProducts() {
 		return productDao.findAll();
@@ -236,34 +239,34 @@ public class ProductServicesImpl implements ProductService{
 		
 		if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.COMPUTER.toString())){
 			//com accessories
-			productCategoryId = productCategoryService.getProductCategory(4).getProductCategoryId();
+			productCategoryId = productSubCategoryService.getProductSubCategoryById(4).getProductSubCategoryId();
 		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.COMPUTERACCESSORIES.toString())){
 			//computers
-			productCategoryId = productCategoryService.getProductCategory(3).getProductCategoryId();
+			productCategoryId = productSubCategoryService.getProductSubCategoryById(3).getProductSubCategoryId();
 		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.MOBILEPHONE.toString())){
 			//mobile phone accessories
-			productCategoryId = productCategoryService.getProductCategory(2).getProductCategoryId();
+			productCategoryId = productSubCategoryService.getProductSubCategoryById(2).getProductSubCategoryId();
 		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.MOBILEPHONEACCESSORIES.toString())){
 			//mobile phone
-			productCategoryId = productCategoryService.getProductCategory(1).getProductCategoryId();
+			productCategoryId = productSubCategoryService.getProductSubCategoryById(1).getProductSubCategoryId();
 		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.CAMERA.toString())){
 			//camera accesories
-			productCategoryId = productCategoryService.getProductCategory(20).getProductCategoryId();
+			productCategoryId = productSubCategoryService.getProductSubCategoryById(20).getProductSubCategoryId();
 		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.CAMERAACCESSORIES.toString())){
 			//camera
-			productCategoryId = productCategoryService.getProductCategory(6).getProductCategoryId();
+			productCategoryId = productSubCategoryService.getProductSubCategoryById(6).getProductSubCategoryId();
 		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.TV.toString())){
 			//audio and fridge
-			productCategoryId = productCategoryService.getProductCategory(7).getProductCategoryId();
+			productCategoryId = productSubCategoryService.getProductSubCategoryById(7).getProductSubCategoryId();
 		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.FRIDGE.toString())){
 			//tc and audio
-			productCategoryId = productCategoryService.getProductCategory(5).getProductCategoryId();
+			productCategoryId = productSubCategoryService.getProductSubCategoryById(5).getProductSubCategoryId();
 		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.AUDIO.toString())){
 			//tc and fridge
-			productCategoryId = productCategoryService.getProductCategory(5).getProductCategoryId();
+			productCategoryId = productSubCategoryService.getProductSubCategoryById(5).getProductSubCategoryId();
 		}else if(product.getProductSubCategory().getSubCategoryName().toString().equals(EnumConstant.ElectronicSubCategory.OTHER.toString())){
 			//other
-			productCategoryId = productCategoryService.getProductCategory(8).getProductCategoryId();
+			productCategoryId = productSubCategoryService.getProductSubCategoryById(8).getProductSubCategoryId();
 		}
 		
 		productList = productDao.getAssociatedProductList(productCategoryId, authenticity, authenticityBoolVal, productType, productTypeBoolVal, productCondition, productConditionBoolVal);
